@@ -3,7 +3,7 @@ from pathlib import Path
 from time import time
 import torch
 from torchvision.utils import make_grid, save_image
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 def sample_images(output_path,
@@ -11,12 +11,12 @@ def sample_images(output_path,
                   batches_done,
                   G_AB,
                   G_BA,
-                  val_dataloader,
+                  valid_dataloader,
                   device):
     """Saves a generated sample from the test set"""
     save_img_path = str(Path(output_path).joinpath("images", dataset_name))
-    Path(save_img_path).mkdir(parents=True)
-    imgs = next(iter(val_dataloader))
+    Path(save_img_path).mkdir(parents=True, exist_ok=True)
+    imgs = next(iter(valid_dataloader))
     G_AB.eval()
     G_BA.eval()
     real_A = imgs["A"].to(device)
@@ -31,7 +31,7 @@ def sample_images(output_path,
     # Arange images along y-axis
     image_grid = torch.cat((real_A, fake_B, real_B, fake_A), 1)
     save_image(image_grid,
-               str(Path(save_img_path).joinpath(".".join((batches_done, "png")))),
+               str(Path(save_img_path).joinpath(".".join((str(batches_done), "png")))),
                normalize=False)
 
 
@@ -44,7 +44,7 @@ def train(output_path,
           G_AB,
           G_BA,
           train_dataloader,
-          val_dataloader,
+          valid_dataloader,
           optimizer_G,
           optimizer_D_A,
           optimizer_D_B,
@@ -70,14 +70,16 @@ def train(output_path,
             real_B = batch["B"].to(device)
 
             # Adversarial ground truths
-            valid = torch.ones((real_A.size(0), *D_A.output_shape))
-            fake = torch.zeros((real_A.size(0), *D_A.output_shape))
+            valid = torch.ones((real_A.size(0), *D_A.output_shape)).to(device)
+            fake = torch.zeros((real_A.size(0), *D_A.output_shape)).to(device)
 
             # ------------------
             #  Train Generators
             # ------------------
             G_AB = G_AB.to(device)
             G_BA = G_BA.to(device)
+            D_A = D_A.to(device)
+            D_B = D_B.to(device)
             G_AB.train()
             G_BA.train()
 
@@ -154,7 +156,7 @@ def train(output_path,
             # Determine approximate time left
             batches_done = epoch*len(train_dataloader)+i
             batches_left = epochs*len(train_dataloader)-batches_done
-            time_left = datetime.timedelta(seconds=batches_left*(time()-prev_time))
+            time_left = timedelta(seconds=batches_left*(time()-prev_time))
             prev_time = time()
 
             # Print log
@@ -177,10 +179,11 @@ def train(output_path,
             # If at sample interval save image
             if batches_done % sample_interval == 0:
                 sample_images(output_path,
+                              dataset_name,
                               batches_done,
                               G_AB,
                               G_BA,
-                              val_dataloader,
+                              valid_dataloader,
                               device)
 
         # Update learning rates
@@ -190,11 +193,12 @@ def train(output_path,
 
         if checkpoint_interval != -1 and epoch % checkpoint_interval == 0:
             # Save model checkpoints
+            saved_models_path = str(Path(output_path).joinpath("saved_models"))
             torch.save(G_AB.state_dict(),
-                       "saved_models/%s/G_AB_%d.pth" % (dataset_name, epoch))
+                       "%s/G_AB_%d.pth" % (saved_models_path, epoch))
             torch.save(G_BA.state_dict(),
-                       "saved_models/%s/G_BA_%d.pth" % (dataset_name, epoch))
+                       "%s/G_BA_%d.pth" % (saved_models_path, epoch))
             torch.save(D_A.state_dict(),
-                       "saved_models/%s/D_A_%d.pth" % (dataset_name, epoch))
+                       "%s/D_A_%d.pth" % (saved_models_path, epoch))
             torch.save(D_B.state_dict(),
-                       "saved_models/%s/D_B_%d.pth" % (dataset_name, epoch))
+                       "%s/D_B_%d.pth" % (saved_models_path, epoch))

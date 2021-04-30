@@ -24,7 +24,7 @@ class ImageDataset(Dataset):
         image_A = Image.open(self.files_A[index % len(self.files_A)])
 
         if self.unaligned:
-            image_B = Image.open(self.files_B[random.randint(0, len(self.files_B) - 1)])
+            image_B = Image.open(self.files_B[random.randint(0, len(self.files_B)-1)])
         else:
             image_B = Image.open(self.files_B[index % len(self.files_B)])
 

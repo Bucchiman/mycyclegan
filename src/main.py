@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-01 00:18:03 +0900
+# LastModified: 2021-05-01 01:51:28 +0900
 #
 
 
@@ -27,11 +27,15 @@ def main(args):
     time_keeper = datetime.now().strftime(r"%Y_%m_%d_%H_%M")
     args.output_path = str(Path(args.output_path).joinpath(time_keeper))
     Path(args.output_path).mkdir(parents=True)
-    Path(args.output_path).joinpath("saved_models").mkdir(parents=True)
+    saved_models_path = str(Path(args.output_path).joinpath("saved_models"))
+    Path(saved_models_path).mkdir()
 
     criterion_GAN = nn.MSELoss()
+    criterion_GAN = criterion_GAN.to(args.device)
     criterion_cycle = nn.L1Loss()
+    criterion_cycle = criterion_cycle.to(args.device)
     criterion_identity = nn.L1Loss()
+    criterion_identity = criterion_identity.to(args.device)
 
     input_shape = (args.channels, args.img_height, args.img_width)
     G_AB = GeneratorResNet(input_shape, args.n_residual_blocks)
@@ -83,11 +87,11 @@ def main(args):
     valid_dataset = ImageDataset(str(Path(args.data_path).joinpath(args.dataset_name)),
                                  transforms_=transforms_,
                                  unaligned=True,
-                                 mode="test"),
-    val_dataloader = DataLoader(valid_dataset,
-                                batch_size=5,
-                                shuffle=True,
-                                num_workers=1)
+                                 mode="test")
+    valid_dataloader = DataLoader(valid_dataset,
+                                  batch_size=5,
+                                  shuffle=True,
+                                  num_workers=1)
     train(args.output_path,
           args.dataset_name,
           args.epoch,
@@ -97,7 +101,7 @@ def main(args):
           G_AB,
           G_BA,
           train_dataloader,
-          val_dataloader,
+          valid_dataloader,
           optimizer_G,
           optimizer_D_A,
           optimizer_D_B,
