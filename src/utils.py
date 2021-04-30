@@ -3,9 +3,7 @@ import time
 import datetime
 import sys
 
-from torch.autograd import Variable
 import torch
-import numpy as np
 
 from torchvision.utils import save_image
 
@@ -30,7 +28,7 @@ class ReplayBuffer:
                     self.data[i] = element
                 else:
                     to_return.append(element)
-        return Variable(torch.cat(to_return))
+        return torch.cat(to_return)
 
 
 class LambdaLR:
@@ -42,3 +40,5 @@ class LambdaLR:
 
     def step(self, epoch):
         return 1.0 - max(0, epoch + self.offset - self.decay_start_epoch) / (self.n_epochs - self.decay_start_epoch)
+
+

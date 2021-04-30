@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-04-30 22:44:23 +0900
+# LastModified: 2021-05-01 00:18:03 +0900
 #
 
 
@@ -20,6 +20,7 @@ from pathlib import Path
 from models import GeneratorResNet, Discriminator, weights_init_normal
 from utils import LambdaLR, ReplayBuffer
 from datasets import ImageDataset
+from train import train
 
 
 def main(args):
@@ -75,10 +76,10 @@ def main(args):
     train_dataset = ImageDataset(str(Path(args.data_path).joinpath(args.dataset_name)),
                                  transforms_=transforms_,
                                  unaligned=True)
-    dataloader = DataLoader(train_dataset,
-                            batch_size=args.batch_size,
-                            shuffle=True,
-                            num_workers=args.n_cpu)
+    train_dataloader = DataLoader(train_dataset,
+                                  batch_size=args.batch_size,
+                                  shuffle=True,
+                                  num_workers=args.n_cpu)
     valid_dataset = ImageDataset(str(Path(args.data_path).joinpath(args.dataset_name)),
                                  transforms_=transforms_,
                                  unaligned=True,
@@ -87,6 +88,32 @@ def main(args):
                                 batch_size=5,
                                 shuffle=True,
                                 num_workers=1)
+    train(args.output_path,
+          args.dataset_name,
+          args.epoch,
+          args.n_epochs,
+          D_A,
+          D_B,
+          G_AB,
+          G_BA,
+          train_dataloader,
+          val_dataloader,
+          optimizer_G,
+          optimizer_D_A,
+          optimizer_D_B,
+          criterion_GAN,
+          criterion_identity,
+          criterion_cycle,
+          args.lambda_id,
+          args.lambda_cyc,
+          fake_A_buffer,
+          fake_B_buffer,
+          args.device,
+          lr_scheduler_G,
+          lr_scheduler_D_A,
+          lr_scheduler_D_B,
+          args.sample_interval,
+          args.checkpoint_interval)
 
 
 if __name__ == "__main__":
@@ -107,8 +134,8 @@ if __name__ == "__main__":
                         help="number of epochs of training")
     parser.add_argument("--dataset_name",
                         type=str,
-                        choices=["monet2photo"],
-                        default="monet2photo",
+                        choices=["monet2photo", "mycustom", "sample"],
+                        default="sample",
                         help="name of the dataset")
     parser.add_argument("--batch_size",
                         type=int,
