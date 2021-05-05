@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-01 01:51:28 +0900
+# LastModified: 2021-05-02 17:25:52 +0900
 #
 
 
@@ -138,7 +138,7 @@ if __name__ == "__main__":
                         help="number of epochs of training")
     parser.add_argument("--dataset_name",
                         type=str,
-                        choices=["monet2photo", "mycustom", "sample"],
+                        choices=["monet2photo", "mycustom", "sample", "web"],
                         default="sample",
                         help="name of the dataset")
     parser.add_argument("--batch_size",
