@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-02 17:25:52 +0900
+# LastModified: 2021-05-18 01:52:11 +0900
 #
 
 
@@ -72,8 +72,9 @@ def main(args):
                                                                       args.decay_epoch).step)
     fake_A_buffer = ReplayBuffer()
     fake_B_buffer = ReplayBuffer()
-    transforms_ = [transforms.Resize(int(args.img_height*1.12), Image.BICUBIC),
-                   transforms.RandomCrop((args.img_height, args.img_width)),
+    transforms_ = [transforms.Resize((int(args.img_height),
+                                      int(args.img_weight)),
+                                     Image.BICUBIC),
                    transforms.RandomHorizontalFlip(),
                    transforms.ToTensor(),
                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
