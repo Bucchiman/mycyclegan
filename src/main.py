@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-18 01:52:11 +0900
+# LastModified: 2021-05-18 02:22:34 +0900
 #
 
 
@@ -57,23 +57,22 @@ def main(args):
     optimizer_D_B = optim.Adam(D_B.parameters(),
                                lr=args.lr,
                                betas=(args.b1, args.b2))
-
     lr_scheduler_G = optim.lr_scheduler.LambdaLR(optimizer_G,
                                                  lr_lambda=LambdaLR(args.n_epochs,
-                                                                    args.epoch,
-                                                                    args.decay_epoch).step)
+-                                                                   0,
+-                                                                   args.decay_epoch).step)
     lr_scheduler_D_A = optim.lr_scheduler.LambdaLR(optimizer_D_A,
                                                    lr_lambda=LambdaLR(args.n_epochs,
-                                                                      args.epoch,
-                                                                      args.decay_epoch).step)
+-                                                                     0,
+-                                                                     args.decay_epoch).step)
     lr_scheduler_D_B = optim.lr_scheduler.LambdaLR(optimizer_D_B,
                                                    lr_lambda=LambdaLR(args.n_epochs,
-                                                                      args.epoch,
+                                                                      0,
                                                                       args.decay_epoch).step)
     fake_A_buffer = ReplayBuffer()
     fake_B_buffer = ReplayBuffer()
-    transforms_ = [transforms.Resize((int(args.img_height),
-                                      int(args.img_weight)),
+    transforms_ = [transforms.Resize((args.img_height,
+                                      args.img_width),
                                      Image.BICUBIC),
                    transforms.RandomHorizontalFlip(),
                    transforms.ToTensor(),
@@ -95,7 +94,6 @@ def main(args):
                                   num_workers=1)
     train(args.output_path,
           args.dataset_name,
-          args.epoch,
           args.n_epochs,
           D_A,
           D_B,
@@ -129,10 +127,6 @@ if __name__ == "__main__":
                         type=str,
                         choices=["cpu", "cuda:0", "cuda:1"],
                         default="cpu")
-    parser.add_argument("--epoch",
-                        type=int,
-                        default=0,
-                        help="epoch to start training from")
     parser.add_argument("--n_epochs",
                         type=int,
                         default=200,

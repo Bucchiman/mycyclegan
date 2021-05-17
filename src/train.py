@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 def sample_images(output_path,
                   dataset_name,
-                  batches_done,
+                  epoch,
                   G_AB,
                   G_BA,
                   valid_dataloader,
@@ -31,13 +31,12 @@ def sample_images(output_path,
     # Arange images along y-axis
     image_grid = torch.cat((real_A, fake_B, real_B, fake_A), 1)
     save_image(image_grid,
-               str(Path(save_img_path).joinpath(".".join((str(batches_done), "png")))),
+               str(Path(save_img_path).joinpath(".".join((str(epoch).zfill(4), "png")))),
                normalize=False)
 
 
 def train(output_path,
           dataset_name,
-          epoch,
           epochs,
           D_A,
           D_B,
@@ -59,10 +58,10 @@ def train(output_path,
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
-          sample_interval,
+          epoch_interval,
           checkpoint_interval):
     prev_time = time()
-    for epoch in range(epoch, epochs):
+    for epoch in range(epochs):
         for i, batch in enumerate(train_dataloader):
 
             # Set model input
@@ -177,10 +176,10 @@ def train(output_path,
             )
 
             # If at sample interval save image
-            if batches_done % sample_interval == 0:
+            if epoch % epoch_interval == 0:
                 sample_images(output_path,
                               dataset_name,
-                              batches_done,
+                              epoch,
                               G_AB,
                               G_BA,
                               valid_dataloader,
