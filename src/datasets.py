@@ -40,3 +40,16 @@ class ImageDataset(Dataset):
 
     def __len__(self):
         return max(len(self.files_A), len(self.files_B))
+
+
+class TestDataset(Dataset):
+    def __init__(self, path, transforms_=None):
+        self.path = path
+        self.img_path = [fp for fp in Path(self.path).iterdir()]
+        self.transform = transforms_
+
+    def __getitem__(self, idx):
+        img_name = Path(self.img_path[idx]).name
+        image = Image.open(img_name)
+        image = self.transform(image)
+        return {"image": image, "name": img_name}
