@@ -3,6 +3,7 @@ from pathlib import Path
 from time import time
 import torch
 from torchvision.utils import make_grid, save_image
+from torchvision import transforms
 from datetime import datetime, timedelta
 
 
@@ -58,6 +59,7 @@ def train(output_path,
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
+          img_shape,
           sample_interval,
           checkpoint_interval):
     prev_time = time()
@@ -91,9 +93,10 @@ def train(output_path,
 
             # GAN loss
             fake_B = G_AB(real_A)
-            loss_GAN_AB = criterion_GAN(D_B(fake_B), valid)
+            transform_D = transforms.Resize(img_shape)
+            loss_GAN_AB = criterion_GAN(D_B(transform_D(fake_B)), valid)
             fake_A = G_BA(real_B)
-            loss_GAN_BA = criterion_GAN(D_A(fake_A), valid)
+            loss_GAN_BA = criterion_GAN(D_A(transform_D(fake_A)), valid)
 
             loss_GAN = (loss_GAN_AB + loss_GAN_BA) / 2
 
@@ -118,10 +121,10 @@ def train(output_path,
             optimizer_D_A.zero_grad()
 
             # Real loss
-            loss_real = criterion_GAN(D_A(real_A), valid)
+            loss_real = criterion_GAN(D_A(transform_D(real_A)), valid)
             # Fake loss (on batch of previously generated samples)
             fake_A_ = fake_A_buffer.push_and_pop(fake_A)
-            loss_fake = criterion_GAN(D_A(fake_A_.detach()), fake)
+            loss_fake = criterion_GAN(D_A(transform_D(fake_A_.detach())), fake)
             # Total loss
             loss_D_A = (loss_real + loss_fake) / 2
 
@@ -135,10 +138,10 @@ def train(output_path,
             optimizer_D_B.zero_grad()
 
             # Real loss
-            loss_real = criterion_GAN(D_B(real_B), valid)
+            loss_real = criterion_GAN(D_B(transform_D(real_B)), valid)
             # Fake loss (on batch of previously generated samples)
             fake_B_ = fake_B_buffer.push_and_pop(fake_B)
-            loss_fake = criterion_GAN(D_B(fake_B_.detach()), fake)
+            loss_fake = criterion_GAN(D_B(transform_D(fake_B_.detach())), fake)
             # Total loss
             loss_D_B = (loss_real + loss_fake) / 2
 
@@ -175,7 +178,7 @@ def train(output_path,
             )
 
             # If at sample interval save image
-            if epoch % sample_interval == 0:
+            if i == len(train_dataloader)-1 and (epoch+1) % sample_interval == 0:
                 sample_images(output_path,
                               dataset_name,
                               epoch,
@@ -189,7 +192,7 @@ def train(output_path,
         lr_scheduler_D_A.step()
         lr_scheduler_D_B.step()
 
-        if checkpoint_interval != -1 and epoch % checkpoint_interval == 0:
+        if epoch % checkpoint_interval == 0 or epoch+1 == epochs:
             # Save model checkpoints
             saved_models_path = str(Path(output_path).joinpath("saved_models"))
             torch.save(G_AB.state_dict(),
