@@ -1,0 +1,148 @@
+[Epoch 0/100] [Batch 0/204] [D loss: 1.554130] [G loss: 10.947254, adv: 1.405448, cycle: 0.638170, identity: 0.632022] ETA: 22:03:18.579311
+[Epoch 0/100] [Batch 1/204] [D loss: 8.957420] [G loss: 15.684412, adv: 7.616052, cycle: 0.555801, identity: 0.502071] ETA: 1 day, 0:20:45.737571
+[Epoch 0/100] [Batch 2/204] [D loss: 1.612330] [G loss: 10.193145, adv: 1.717605, cycle: 0.581928, identity: 0.531253] ETA: 1 day, 0:11:46.175776
+[Epoch 0/100] [Batch 3/204] [D loss: 1.588731] [G loss: 9.562698, adv: 1.475786, cycle: 0.544285, identity: 0.528812] ETA: 1 day, 0:07:43.126117
+[Epoch 0/100] [Batch 4/204] [D loss: 1.275106] [G loss: 8.243172, adv: 1.252548, cycle: 0.464586, identity: 0.468953] ETA: 1 day, 0:10:10.367572
+[Epoch 0/100] [Batch 5/204] [D loss: 1.303947] [G loss: 7.446135, adv: 1.349195, cycle: 0.410451, identity: 0.398486] ETA: 1 day, 0:11:38.874054
+[Epoch 0/100] [Batch 6/204] [D loss: 1.124441] [G loss: 7.289619, adv: 1.157160, cycle: 0.419453, identity: 0.387585] ETA: 1 day, 0:08:11.893813
+[Epoch 0/100] [Batch 7/204] [D loss: 1.040894] [G loss: 6.800380, adv: 1.192276, cycle: 0.383526, identity: 0.354568] ETA: 1 day, 0:09:44.466141
+[Epoch 0/100] [Batch 8/204] [D loss: 0.948226] [G loss: 6.349895, adv: 1.057989, cycle: 0.360940, identity: 0.336502] ETA: 1 day, 0:10:50.896627
+[Epoch 0/100] [Batch 9/204] [D loss: 0.896339] [G loss: 6.289457, adv: 0.929822, cycle: 0.365473, identity: 0.340982] ETA: 1 day, 0:12:55.323849
+[Epoch 0/100] [Batch 10/204] [D loss: 0.811666] [G loss: 5.717934, adv: 0.880763, cycle: 0.329487, identity: 0.308459] ETA: 1 day, 0:12:14.535027
+[Epoch 0/100] [Batch 11/204] [D loss: 0.778011] [G loss: 5.867971, adv: 0.790867, cycle: 0.346076, identity: 0.323269] ETA: 1 day, 1:40:25.781986
+[Epoch 0/100] [Batch 12/204] [D loss: 0.731318] [G loss: 5.414778, adv: 0.743020, cycle: 0.318524, identity: 0.297303] ETA: 1 day, 0:16:44.161700
+[Epoch 0/100] [Batch 13/204] [D loss: 0.735039] [G loss: 5.209163, adv: 0.765478, cycle: 0.301319, identity: 0.286100] ETA: 1 day, 0:12:49.771983
+[Epoch 0/100] [Batch 14/204] [D loss: 0.715233] [G loss: 5.133054, adv: 0.722916, cycle: 0.298092, identity: 0.285844] ETA: 1 day, 0:12:54.609483
+[Epoch 0/100] [Batch 15/204] [D loss: 0.614255] [G loss: 5.255206, adv: 0.664748, cycle: 0.313643, identity: 0.290806] ETA: 1 day, 0:12:01.717075
+[Epoch 0/100] [Batch 16/204] [D loss: 0.673554] [G loss: 5.315838, adv: 0.620756, cycle: 0.318534, identity: 0.301948] ETA: 1 day, 0:16:55.308022
+[Epoch 0/100] [Batch 17/204] [D loss: 0.613365] [G loss: 5.001094, adv: 0.634594, cycle: 0.295532, identity: 0.282236] ETA: 1 day, 0:14:54.440589
+[Epoch 0/100] [Batch 18/204] [D loss: 0.715229] [G loss: 4.801157, adv: 0.713537, cycle: 0.277056, identity: 0.263413] ETA: 1 day, 0:16:35.267730
+[Epoch 0/100] [Batch 19/204] [D loss: 0.789800] [G loss: 5.051612, adv: 0.907542, cycle: 0.280919, identity: 0.266975] ETA: 1 day, 0:21:34.869940
+[Epoch 0/100] [Batch 20/204] [D loss: 0.911841] [G loss: 5.000193, adv: 1.005950, cycle: 0.270698, identity: 0.257452] ETA: 1 day, 0:20:35.942616
+[Epoch 0/100] [Batch 21/204] [D loss: 0.956409] [G loss: 5.110241, adv: 1.115833, cycle: 0.271317, identity: 0.256247] ETA: 1 day, 0:25:28.370157
+[Epoch 0/100] [Batch 22/204] [D loss: 0.991374] [G loss: 5.086637, adv: 1.019621, cycle: 0.276624, identity: 0.260156] ETA: 1 day, 0:23:00.700783
+[Epoch 0/100] [Batch 23/204] [D loss: 1.552305] [G loss: 5.711587, adv: 1.715241, cycle: 0.273653, identity: 0.251963] ETA: 1 day, 0:24:05.186058
+[Epoch 0/100] [Batch 24/204] [D loss: 1.020585] [G loss: 4.847723, adv: 1.076380, cycle: 0.254853, identity: 0.244563] ETA: 1 day, 0:25:30.748375
+[Epoch 0/100] [Batch 25/204] [D loss: 0.597476] [G loss: 4.643470, adv: 0.645434, cycle: 0.272364, identity: 0.254878] ETA: 1 day, 0:20:05.644703
+[Epoch 0/100] [Batch 26/204] [D loss: 0.712207] [G loss: 4.388285, adv: 0.701687, cycle: 0.248786, identity: 0.239747] ETA: 1 day, 0:22:30.286935
+[Epoch 0/100] [Batch 27/204] [D loss: 0.571108] [G loss: 4.627344, adv: 0.651708, cycle: 0.269810, identity: 0.255507] ETA: 1 day, 0:25:24.106929
+[Epoch 0/100] [Batch 28/204] [D loss: 0.528493] [G loss: 4.261936, adv: 0.563963, cycle: 0.251712, identity: 0.236171] ETA: 1 day, 0:27:06.068614
+[Epoch 0/100] [Batch 29/204] [D loss: 0.517794] [G loss: 4.729066, adv: 0.542486, cycle: 0.284026, identity: 0.269265] ETA: 1 day, 0:33:56.379676
+[Epoch 0/100] [Batch 30/204] [D loss: 0.447118] [G loss: 4.483255, adv: 0.528407, cycle: 0.267855, identity: 0.255260] ETA: 1 day, 0:21:24.250345
+[Epoch 0/100] [Batch 31/204] [D loss: 0.491793] [G loss: 4.216997, adv: 0.480714, cycle: 0.253212, identity: 0.240833] ETA: 1 day, 0:28:16.295054
+[Epoch 0/100] [Batch 32/204] [D loss: 0.418418] [G loss: 4.342061, adv: 0.480283, cycle: 0.261935, identity: 0.248486] ETA: 1 day, 0:28:49.828266
+[Epoch 0/100] [Batch 33/204] [D loss: 0.434299] [G loss: 4.160123, adv: 0.439418, cycle: 0.252438, identity: 0.239265] ETA: 1 day, 0:32:44.118900
+[Epoch 0/100] [Batch 34/204] [D loss: 0.413551] [G loss: 3.728604, adv: 0.457242, cycle: 0.223613, identity: 0.207045] ETA: 1 day, 0:29:13.114865
+[Epoch 0/100] [Batch 35/204] [D loss: 0.408433] [G loss: 4.518995, adv: 0.500882, cycle: 0.269801, identity: 0.264021] ETA: 1 day, 0:34:12.821504
+[Epoch 0/100] [Batch 36/204] [D loss: 0.401438] [G loss: 4.215134, adv: 0.458528, cycle: 0.253501, identity: 0.244319] ETA: 1 day, 0:33:49.407077
+[Epoch 0/100] [Batch 37/204] [D loss: 0.432192] [G loss: 4.164135, adv: 0.460345, cycle: 0.252793, identity: 0.235173] ETA: 1 day, 0:28:36.816215
+[Epoch 0/100] [Batch 38/204] [D loss: 0.422477] [G loss: 4.291008, adv: 0.539317, cycle: 0.252522, identity: 0.245293] ETA: 1 day, 0:33:29.391380
+[Epoch 0/100] [Batch 39/204] [D loss: 0.420808] [G loss: 4.222016, adv: 0.473283, cycle: 0.253891, identity: 0.241965] ETA: 1 day, 0:26:56.878712
+[Epoch 0/100] [Batch 40/204] [D loss: 0.389713] [G loss: 3.925797, adv: 0.444347, cycle: 0.237308, identity: 0.221674] ETA: 1 day, 0:29:23.686628
+[Epoch 0/100] [Batch 41/204] [D loss: 0.388638] [G loss: 4.204067, adv: 0.402699, cycle: 0.258649, identity: 0.242977] ETA: 1 day, 0:33:14.943524
+[Epoch 0/100] [Batch 42/204] [D loss: 0.361026] [G loss: 3.963591, adv: 0.413334, cycle: 0.241150, identity: 0.227750] ETA: 1 day, 0:31:35.167763
+[Epoch 0/100] [Batch 43/204] [D loss: 0.390966] [G loss: 4.123784, adv: 0.408336, cycle: 0.251043, identity: 0.241004] ETA: 1 day, 0:29:22.334570
+[Epoch 0/100] [Batch 44/204] [D loss: 0.358377] [G loss: 4.157593, adv: 0.488795, cycle: 0.249100, identity: 0.235560] ETA: 1 day, 0:29:48.404508
+[Epoch 0/100] [Batch 45/204] [D loss: 0.367170] [G loss: 3.963486, adv: 0.441226, cycle: 0.239789, identity: 0.224875] ETA: 1 day, 0:33:39.040396
+[Epoch 0/100] [Batch 46/204] [D loss: 0.353493] [G loss: 3.765423, adv: 0.410472, cycle: 0.227107, identity: 0.216776] ETA: 1 day, 0:29:52.303723
+[Epoch 0/100] [Batch 47/204] [D loss: 0.355699] [G loss: 4.597962, adv: 0.393480, cycle: 0.285538, identity: 0.269820] ETA: 1 day, 0:34:38.064949
+[Epoch 0/100] [Batch 48/204] [D loss: 0.348065] [G loss: 3.753121, adv: 0.437508, cycle: 0.225902, identity: 0.211318] ETA: 1 day, 0:29:43.016785
+[Epoch 0/100] [Batch 49/204] [D loss: 0.375491] [G loss: 4.028226, adv: 0.420643, cycle: 0.244708, identity: 0.232101] ETA: 1 day, 0:31:13.255326
+[Epoch 0/100] [Batch 50/204] [D loss: 0.329956] [G loss: 3.991414, adv: 0.474575, cycle: 0.238817, identity: 0.225733] ETA: 1 day, 0:35:39.324164
+[Epoch 0/100] [Batch 51/204] [D loss: 0.356380] [G loss: 4.253377, adv: 0.489694, cycle: 0.254857, identity: 0.243022] ETA: 1 day, 0:40:31.230198
+[Epoch 0/100] [Batch 52/204] [D loss: 0.351355] [G loss: 4.056959, adv: 0.438102, cycle: 0.244816, identity: 0.234140] ETA: 1 day, 0:23:20.170613
+[Epoch 0/100] [Batch 53/204] [D loss: 0.387620] [G loss: 4.072071, adv: 0.575637, cycle: 0.239157, identity: 0.220973] ETA: 1 day, 0:35:04.247677
+[Epoch 0/100] [Batch 54/204] [D loss: 0.585985] [G loss: 4.437287, adv: 0.679300, cycle: 0.254214, identity: 0.243169] ETA: 1 day, 0:37:12.117944
+[Epoch 0/100] [Batch 55/204] [D loss: 0.618082] [G loss: 4.518407, adv: 0.713222, cycle: 0.258241, identity: 0.244555] ETA: 1 day, 0:30:26.876866
+[Epoch 0/100] [Batch 56/204] [D loss: 0.479826] [G loss: 4.046051, adv: 0.627275, cycle: 0.230659, identity: 0.222438] ETA: 1 day, 0:34:17.182676
+[Epoch 0/100] [Batch 57/204] [D loss: 0.316550] [G loss: 4.148970, adv: 0.516742, cycle: 0.246363, identity: 0.233721] ETA: 1 day, 0:27:52.447106
+[Epoch 0/100] [Batch 58/204] [D loss: 0.344953] [G loss: 4.070208, adv: 0.449942, cycle: 0.246768, identity: 0.230518] ETA: 1 day, 0:30:21.103317
+[Epoch 0/100] [Batch 59/204] [D loss: 0.345349] [G loss: 4.310800, adv: 0.469248, cycle: 0.261852, identity: 0.244607] ETA: 1 day, 0:31:58.730783
+[Epoch 0/100] [Batch 60/204] [D loss: 0.346725] [G loss: 4.336756, adv: 0.517606, cycle: 0.257198, identity: 0.249434] ETA: 1 day, 0:36:45.185180
+[Epoch 0/100] [Batch 61/204] [D loss: 0.302508] [G loss: 3.881748, adv: 0.505569, cycle: 0.229848, identity: 0.215540] ETA: 1 day, 0:31:20.001354
+[Epoch 0/100] [Batch 62/204] [D loss: 0.347010] [G loss: 3.967164, adv: 0.380360, cycle: 0.245403, identity: 0.226555] ETA: 1 day, 0:41:18.100198
+[Epoch 0/100] [Batch 63/204] [D loss: 0.300931] [G loss: 3.815535, adv: 0.426084, cycle: 0.230102, identity: 0.217685] ETA: 1 day, 0:24:38.710048
+[Epoch 0/100] [Batch 64/204] [D loss: 0.310701] [G loss: 3.722581, adv: 0.440366, cycle: 0.222398, identity: 0.211646] ETA: 1 day, 0:22:44.003574
+[Epoch 0/100] [Batch 65/204] [D loss: 0.323525] [G loss: 4.033948, adv: 0.397400, cycle: 0.247332, identity: 0.232647] ETA: 1 day, 0:35:47.638681
+[Epoch 0/100] [Batch 66/204] [D loss: 0.290813] [G loss: 4.078925, adv: 0.411433, cycle: 0.251005, identity: 0.231488] ETA: 1 day, 0:33:49.608253
+[Epoch 0/100] [Batch 67/204] [D loss: 0.300912] [G loss: 3.916962, adv: 0.359829, cycle: 0.244777, identity: 0.221872] ETA: 1 day, 0:35:17.279673
+[Epoch 0/100] [Batch 68/204] [D loss: 0.277940] [G loss: 4.367459, adv: 0.412280, cycle: 0.267932, identity: 0.255171] ETA: 1 day, 0:32:39.991677
+[Epoch 0/100] [Batch 69/204] [D loss: 0.248300] [G loss: 3.736788, adv: 0.499018, cycle: 0.220203, identity: 0.207148] ETA: 1 day, 0:34:09.954657
+[Epoch 0/100] [Batch 70/204] [D loss: 0.255597] [G loss: 3.617333, adv: 0.478002, cycle: 0.214134, identity: 0.199599] ETA: 1 day, 0:37:29.786129
+[Epoch 0/100] [Batch 71/204] [D loss: 0.302177] [G loss: 4.434632, adv: 0.397658, cycle: 0.274316, identity: 0.258762] ETA: 1 day, 0:28:52.574792
+[Epoch 0/100] [Batch 72/204] [D loss: 0.367288] [G loss: 3.751241, adv: 0.368280, cycle: 0.230354, identity: 0.215885] ETA: 1 day, 0:35:57.418047
+[Epoch 0/100] [Batch 73/204] [D loss: 0.290055] [G loss: 3.826406, adv: 0.452563, cycle: 0.230641, identity: 0.213486] ETA: 1 day, 1:01:15.915605
+[Epoch 0/100] [Batch 74/204] [D loss: 0.301241] [G loss: 4.020166, adv: 0.419273, cycle: 0.245421, identity: 0.229336] ETA: 1 day, 0:28:37.378418
+[Epoch 0/100] [Batch 75/204] [D loss: 0.292806] [G loss: 4.075077, adv: 0.331487, cycle: 0.258560, identity: 0.231597] ETA: 1 day, 0:36:27.980872
+[Epoch 0/100] [Batch 76/204] [D loss: 0.275009] [G loss: 3.895567, adv: 0.357018, cycle: 0.240657, identity: 0.226395] ETA: 1 day, 0:34:17.776724
+[Epoch 0/100] [Batch 77/204] [D loss: 0.346479] [G loss: 3.904300, adv: 0.311704, cycle: 0.247476, identity: 0.223566] ETA: 1 day, 0:26:59.321834
+[Epoch 0/100] [Batch 78/204] [D loss: 0.260467] [G loss: 3.291937, adv: 0.432024, cycle: 0.196719, identity: 0.178545] ETA: 1 day, 0:27:50.458004
+[Epoch 0/100] [Batch 79/204] [D loss: 0.282374] [G loss: 3.721792, adv: 0.396620, cycle: 0.225967, identity: 0.213100] ETA: 1 day, 0:42:41.070066
+[Epoch 0/100] [Batch 80/204] [D loss: 0.281244] [G loss: 4.308959, adv: 0.451639, cycle: 0.260081, identity: 0.251301] ETA: 1 day, 0:34:53.745728
+[Epoch 0/100] [Batch 81/204] [D loss: 0.277992] [G loss: 4.141053, adv: 0.366558, cycle: 0.255210, identity: 0.244480] ETA: 1 day, 0:32:05.944594
+[Epoch 0/100] [Batch 82/204] [D loss: 0.313447] [G loss: 4.103204, adv: 0.394892, cycle: 0.254155, identity: 0.233353] ETA: 1 day, 0:31:05.894305
+[Epoch 0/100] [Batch 83/204] [D loss: 0.276395] [G loss: 3.216778, adv: 0.347725, cycle: 0.196117, identity: 0.181578] ETA: 1 day, 0:31:31.984623
+[Epoch 0/100] [Batch 84/204] [D loss: 0.257802] [G loss: 3.639932, adv: 0.427345, cycle: 0.219294, identity: 0.203930] ETA: 1 day, 0:33:44.086267
+[Epoch 0/100] [Batch 85/204] [D loss: 0.293373] [G loss: 3.487143, adv: 0.355167, cycle: 0.212513, identity: 0.201370] ETA: 1 day, 0:26:11.397712
+[Epoch 0/100] [Batch 86/204] [D loss: 0.252874] [G loss: 3.741765, adv: 0.426812, cycle: 0.226960, identity: 0.209070] ETA: 1 day, 0:32:24.064759
+[Epoch 0/100] [Batch 87/204] [D loss: 0.288706] [G loss: 4.211632, adv: 0.439518, cycle: 0.254192, identity: 0.246039] ETA: 1 day, 0:23:58.116991
+[Epoch 0/100] [Batch 88/204] [D loss: 0.271840] [G loss: 3.321088, adv: 0.468852, cycle: 0.196460, identity: 0.177527] ETA: 1 day, 0:29:35.187840
+[Epoch 0/100] [Batch 89/204] [D loss: 0.286055] [G loss: 3.833420, adv: 0.436057, cycle: 0.233315, identity: 0.212843] ETA: 1 day, 0:34:11.107631
+[Epoch 0/100] [Batch 90/204] [D loss: 0.281820] [G loss: 3.557055, adv: 0.397749, cycle: 0.216654, identity: 0.198552] ETA: 1 day, 0:34:24.359329
+[Epoch 0/100] [Batch 91/204] [D loss: 0.277598] [G loss: 3.425807, adv: 0.398418, cycle: 0.205819, identity: 0.193839] ETA: 1 day, 0:29:58.252468
+[Epoch 0/100] [Batch 92/204] [D loss: 0.308872] [G loss: 3.922283, adv: 0.431336, cycle: 0.237615, identity: 0.222960] ETA: 1 day, 0:30:43.286374
+[Epoch 0/100] [Batch 93/204] [D loss: 0.280280] [G loss: 3.814424, adv: 0.480045, cycle: 0.227748, identity: 0.211379] ETA: 1 day, 0:41:15.902402
+[Epoch 0/100] [Batch 94/204] [D loss: 0.266376] [G loss: 3.736143, adv: 0.440529, cycle: 0.223185, identity: 0.212752] ETA: 1 day, 0:21:48.101495
+[Epoch 0/100] [Batch 95/204] [D loss: 0.294430] [G loss: 3.550546, adv: 0.437076, cycle: 0.212795, identity: 0.197104] ETA: 1 day, 0:29:25.844780
+[Epoch 0/100] [Batch 96/204] [D loss: 0.305308] [G loss: 3.527708, adv: 0.436362, cycle: 0.210971, identity: 0.196327] ETA: 1 day, 0:26:01.793404
+[Epoch 0/100] [Batch 97/204] [D loss: 0.271887] [G loss: 3.618953, adv: 0.472257, cycle: 0.214429, identity: 0.200481] ETA: 1 day, 0:23:03.852600
+[Epoch 0/100] [Batch 98/204] [D loss: 0.265035] [G loss: 3.962310, adv: 0.396596, cycle: 0.242878, identity: 0.227387] ETA: 1 day, 0:35:58.446734
+[Epoch 0/100] [Batch 99/204] [D loss: 0.254073] [G loss: 3.990893, adv: 0.436979, cycle: 0.243616, identity: 0.223552] ETA: 1 day, 0:28:29.794114
+[Epoch 0/100] [Batch 100/204] [D loss: 0.262712] [G loss: 4.158108, adv: 0.420377, cycle: 0.254993, identity: 0.237561] ETA: 1 day, 0:31:15.406933
+[Epoch 0/100] [Batch 101/204] [D loss: 0.229218] [G loss: 3.623515, adv: 0.498761, cycle: 0.215912, identity: 0.193127] ETA: 1 day, 0:39:39.895271
+[Epoch 0/100] [Batch 102/204] [D loss: 0.249425] [G loss: 3.995339, adv: 0.437291, cycle: 0.241834, identity: 0.227943] ETA: 1 day, 0:29:38.874370
+[Epoch 0/100] [Batch 103/204] [D loss: 0.252090] [G loss: 3.592186, adv: 0.420756, cycle: 0.216317, identity: 0.201651] ETA: 1 day, 0:28:02.416327
+[Epoch 0/100] [Batch 104/204] [D loss: 0.238578] [G loss: 3.305063, adv: 0.427011, cycle: 0.195660, identity: 0.184291] ETA: 1 day, 0:33:58.756981
+[Epoch 0/100] [Batch 105/204] [D loss: 0.235532] [G loss: 3.487834, adv: 0.477538, cycle: 0.206703, identity: 0.188654] ETA: 1 day, 0:31:53.069004
+[Epoch 0/100] [Batch 106/204] [D loss: 0.260852] [G loss: 3.487280, adv: 0.467605, cycle: 0.207143, identity: 0.189650] ETA: 1 day, 0:28:23.319787
+[Epoch 0/100] [Batch 107/204] [D loss: 0.288061] [G loss: 3.825279, adv: 0.364239, cycle: 0.234513, identity: 0.223181] ETA: 1 day, 0:28:13.612844
+[Epoch 0/100] [Batch 108/204] [D loss: 0.268948] [G loss: 3.423927, adv: 0.408730, cycle: 0.204712, identity: 0.193615] ETA: 1 day, 0:32:56.566109
+[Epoch 0/100] [Batch 109/204] [D loss: 0.284440] [G loss: 3.955001, adv: 0.417761, cycle: 0.242998, identity: 0.221452] ETA: 1 day, 0:39:27.406778
+[Epoch 0/100] [Batch 110/204] [D loss: 0.309898] [G loss: 3.971754, adv: 0.426978, cycle: 0.240774, identity: 0.227407] ETA: 1 day, 0:31:28.104386
+[Epoch 0/100] [Batch 111/204] [D loss: 0.286496] [G loss: 3.395088, adv: 0.446643, cycle: 0.199668, identity: 0.190353] ETA: 1 day, 0:34:30.065542
+[Epoch 0/100] [Batch 112/204] [D loss: 0.282738] [G loss: 3.214680, adv: 0.373218, cycle: 0.192453, identity: 0.183386] ETA: 1 day, 0:31:35.605835
+[Epoch 0/100] [Batch 113/204] [D loss: 0.289536] [G loss: 3.330269, adv: 0.271952, cycle: 0.208512, identity: 0.194640] ETA: 1 day, 0:29:19.562234
+[Epoch 0/100] [Batch 114/204] [D loss: 0.235809] [G loss: 3.773832, adv: 0.396165, cycle: 0.230113, identity: 0.215308] ETA: 1 day, 0:31:33.687308
+[Epoch 0/100] [Batch 115/204] [D loss: 0.223436] [G loss: 3.703229, adv: 0.443677, cycle: 0.220274, identity: 0.211362] ETA: 1 day, 0:21:10.619497
+[Epoch 0/100] [Batch 116/204] [D loss: 0.256553] [G loss: 3.674361, adv: 0.416166, cycle: 0.220115, identity: 0.211409] ETA: 1 day, 0:24:22.008975
+[Epoch 0/100] [Batch 117/204] [D loss: 0.229628] [G loss: 3.633041, adv: 0.450704, cycle: 0.217872, identity: 0.200723] ETA: 1 day, 0:29:25.391811
+[Epoch 0/100] [Batch 118/204] [D loss: 0.228536] [G loss: 3.724239, adv: 0.416293, cycle: 0.226367, identity: 0.208854] ETA: 1 day, 0:27:36.363858
+[Epoch 0/100] [Batch 119/204] [D loss: 0.279484] [G loss: 3.474149, adv: 0.374681, cycle: 0.213733, identity: 0.192427] ETA: 1 day, 0:24:04.580168
+[Epoch 0/100] [Batch 120/204] [D loss: 0.253072] [G loss: 3.882996, adv: 0.410206, cycle: 0.235037, identity: 0.224483] ETA: 1 day, 0:17:38.413839
+[Epoch 0/100] [Batch 121/204] [D loss: 0.251763] [G loss: 3.866215, adv: 0.411063, cycle: 0.239892, identity: 0.211246] ETA: 1 day, 0:22:38.128870
+[Epoch 0/100] [Batch 122/204] [D loss: 0.218043] [G loss: 4.112512, adv: 0.405037, cycle: 0.261769, identity: 0.217957] ETA: 1 day, 0:25:49.962501
+[Epoch 0/100] [Batch 123/204] [D loss: 0.240953] [G loss: 4.014082, adv: 0.429191, cycle: 0.241518, identity: 0.233941] ETA: 1 day, 0:34:12.982487
+[Epoch 0/100] [Batch 124/204] [D loss: 0.261696] [G loss: 3.947252, adv: 0.359797, cycle: 0.245903, identity: 0.225685] ETA: 1 day, 0:27:07.539432
+[Epoch 0/100] [Batch 125/204] [D loss: 0.247121] [G loss: 4.124896, adv: 0.346362, cycle: 0.262194, identity: 0.231318] ETA: 1 day, 0:31:15.195920
+[Epoch 0/100] [Batch 126/204] [D loss: 0.270143] [G loss: 4.433550, adv: 0.429900, cycle: 0.272838, identity: 0.255054] ETA: 1 day, 0:29:56.446577
+[Epoch 0/100] [Batch 127/204] [D loss: 0.228647] [G loss: 3.883750, adv: 0.570538, cycle: 0.227323, identity: 0.207996] ETA: 1 day, 0:31:54.155714
+[Epoch 0/100] [Batch 128/204] [D loss: 0.235383] [G loss: 3.468565, adv: 0.442050, cycle: 0.206521, identity: 0.192261] ETA: 1 day, 0:41:28.727566
+[Epoch 0/100] [Batch 129/204] [D loss: 0.280134] [G loss: 3.547559, adv: 0.396243, cycle: 0.212521, identity: 0.205221] ETA: 1 day, 0:27:37.767343
+[Epoch 0/100] [Batch 130/204] [D loss: 0.291442] [G loss: 3.511928, adv: 0.527599, cycle: 0.203898, identity: 0.189070] ETA: 1 day, 0:27:19.016905
+[Epoch 0/100] [Batch 131/204] [D loss: 0.396454] [G loss: 4.292009, adv: 0.490255, cycle: 0.265610, identity: 0.229130] ETA: 1 day, 0:30:24.344624
+[Epoch 0/100] [Batch 132/204] [D loss: 0.422295] [G loss: 4.069204, adv: 0.575470, cycle: 0.238956, identity: 0.220834] ETA: 1 day, 0:34:09.843598
+[Epoch 0/100] [Batch 133/204] [D loss: 0.364187] [G loss: 3.666876, adv: 0.452763, cycle: 0.218712, identity: 0.205399] ETA: 1 day, 0:32:45.610971
+[Epoch 0/100] [Batch 134/204] [D loss: 0.288295] [G loss: 3.256150, adv: 0.396384, cycle: 0.195115, identity: 0.181722] ETA: 1 day, 0:22:56.096858
+[Epoch 0/100] [Batch 135/204] [D loss: 0.259573] [G loss: 3.438834, adv: 0.363418, cycle: 0.210344, identity: 0.194396] ETA: 1 day, 0:23:42.815841
+[Epoch 0/100] [Batch 136/204] [D loss: 0.251703] [G loss: 3.434776, adv: 0.457528, cycle: 0.204373, identity: 0.186703] ETA: 1 day, 0:29:17.176565
+[Epoch 0/100] [Batch 137/204] [D loss: 0.286752] [G loss: 3.650747, adv: 0.395258, cycle: 0.220969, identity: 0.209160] ETA: 1 day, 0:27:13.228023
+[Epoch 0/100] [Batch 138/204] [D loss: 0.239935] [G loss: 3.412182, adv: 0.394013, cycle: 0.205596, identity: 0.192441] ETA: 1 day, 0:32:01.434165
+[Epoch 0/100] [Batch 139/204] [D loss: 0.227088] [G loss: 3.998744, adv: 0.441697, cycle: 0.241416, identity: 0.228577] ETA: 1 day, 0:30:59.620053
+[Epoch 0/100] [Batch 140/204] [D loss: 0.202882] [G loss: 3.387788, adv: 0.436376, cycle: 0.199338, identity: 0.191607] ETA: 1 day, 0:29:37.755957
+[Epoch 0/100] [Batch 141/204] [D loss: 0.203067] [G loss: 3.735759, adv: 0.411121, cycle: 0.226484, identity: 0.211961] ETA: 1 day, 0:34:49.733168
+[Epoch 0/100] [Batch 142/204] [D loss: 0.235566] [G loss: 3.783371, adv: 0.404332, cycle: 0.227425, identity: 0.220958] ETA: 1 day, 0:23:46.264844
+[Epoch 0/100] [Batch 143/204] [D loss: 0.224555] [G loss: 3.638727, adv: 0.433811, cycle: 0.222724, identity: 0.195536] ETA: 1 day, 0:31:15.833998
+[Epoch 0/100] [Batch 144/204] [D loss: 0.231974] [G loss: 3.161407, adv: 0.464971, cycle: 0.186876, identity: 0.165535] ETA: 1 day, 0:33:28.906631
+[Epoch 0/100] [Batch 145/204] [D loss: 0.221289] [G loss: 3.588847, adv: 0.458805, cycle: 0.212218, identity: 0.201572] ETA: 1 day, 0:48:15.794041
+[Epoch 0/100] [Batch 146/204] [D loss: 0.240540] [G loss: 3.706860, adv: 0.326347, cycle: 0.234906, identity: 0.206291] ETA: 1 day, 0:35:29.312717
+[Epoch 0/100] [Batch 147/204] [D loss: 0.220751] [G loss: 3.237819, adv: 0.381325, cycle: 0.195677, identity: 0.179945] ETA: 1 day, 0:27:12.873957

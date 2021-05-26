@@ -92,6 +92,7 @@ def main(args):
                                   batch_size=5,
                                   shuffle=True,
                                   num_workers=1)
+
     train(args.output_path,
           args.dataset_name,
           args.n_epochs,

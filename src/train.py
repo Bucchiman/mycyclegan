@@ -58,12 +58,11 @@ def train(output_path,
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
-          epoch_interval,
+          sample_interval,
           checkpoint_interval):
     prev_time = time()
     for epoch in range(epochs):
         for i, batch in enumerate(train_dataloader):
-
             # Set model input
             real_A = batch["A"].to(device)
             real_B = batch["B"].to(device)
@@ -176,7 +175,7 @@ def train(output_path,
             )
 
             # If at sample interval save image
-            if epoch % epoch_interval == 0:
+            if epoch % sample_interval == 0:
                 sample_images(output_path,
                               dataset_name,
                               epoch,
