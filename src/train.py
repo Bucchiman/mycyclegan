@@ -3,6 +3,7 @@ from pathlib import Path
 from time import time
 import torch
 from torchvision.utils import make_grid, save_image
+from torchvision import transforms
 from datetime import datetime, timedelta
 
 
@@ -58,6 +59,7 @@ def train(output_path,
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
+          img_shape,
           epoch_interval,
           checkpoint_interval):
     prev_time = time()
@@ -92,9 +94,10 @@ def train(output_path,
 
             # GAN loss
             fake_B = G_AB(real_A)
-            loss_GAN_AB = criterion_GAN(D_B(fake_B), valid)
+            transform_D = transforms.Resize(img_shape)
+            loss_GAN_AB = criterion_GAN(D_B(transform_D(fake_B)), valid)
             fake_A = G_BA(real_B)
-            loss_GAN_BA = criterion_GAN(D_A(fake_A), valid)
+            loss_GAN_BA = criterion_GAN(D_A(transform_D(fake_A)), valid)
 
             loss_GAN = (loss_GAN_AB + loss_GAN_BA) / 2
 

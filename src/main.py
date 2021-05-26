@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-18 02:22:34 +0900
+# LastModified: 2021-05-27 01:31:00 +0900
 #
 
 
@@ -38,8 +38,9 @@ def main(args):
     criterion_identity = criterion_identity.to(args.device)
 
     input_shape = (args.channels, args.img_height, args.img_width)
-    G_AB = GeneratorResNet(input_shape, args.n_residual_blocks)
-    G_BA = GeneratorResNet(input_shape, args.n_residual_blocks)
+    generate_input_shape = (args.channels, args.generator_img_height, args.generator_img_width)
+    G_AB = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
+    G_BA = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
     D_A = Discriminator(input_shape)
     D_B = Discriminator(input_shape)
     G_AB.apply(weights_init_normal)
@@ -69,10 +70,11 @@ def main(args):
                                                    lr_lambda=LambdaLR(args.n_epochs,
                                                                       0,
                                                                       args.decay_epoch).step)
+    img_shape = (args.img_height, args.img_width)
     fake_A_buffer = ReplayBuffer()
     fake_B_buffer = ReplayBuffer()
-    transforms_ = [transforms.Resize((args.img_height,
-                                      args.img_width),
+    transforms_ = [transforms.Resize((args.generator_img_height,
+                                      args.generator_img_width),
                                      Image.BICUBIC),
                    transforms.RandomHorizontalFlip(),
                    transforms.ToTensor(),
@@ -115,6 +117,7 @@ def main(args):
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
+          img_shape,
           args.sample_interval,
           args.checkpoint_interval)
 
@@ -168,6 +171,14 @@ if __name__ == "__main__":
                         type=int,
                         default=256,
                         help="size of image width")
+    parser.add_argument("--generator_img_height",
+                        type=int,
+                        default=1024,
+                        help="size of image height by generating")
+    parser.add_argument("--generator_img_width",
+                        type=int,
+                        default=512,
+                        help="size of image width by generating")
     parser.add_argument("--channels",
                         type=int,
                         default=3,
