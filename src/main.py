@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-27 01:38:04 +0900
+# LastModified: 2021-05-27 01:40:22 +0900
 #
 
 
@@ -183,7 +183,7 @@ if __name__ == "__main__":
                         type=int,
                         default=3,
                         help="number of image channels")
-    parser.add_argument("--epoch_interval",
+    parser.add_argument("--sample_interval",
                         type=int,
                         default=50,
                         help="interval between saving generator outputs")
