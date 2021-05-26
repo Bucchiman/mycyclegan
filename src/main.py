@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-18 02:22:34 +0900
+# LastModified: 2021-05-18 22:06:23 +0900
 #
 
 
@@ -115,7 +115,7 @@ def main(args):
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
-          args.sample_interval,
+          args.epoch_interval,
           args.checkpoint_interval)
 
 
@@ -172,13 +172,13 @@ if __name__ == "__main__":
                         type=int,
                         default=3,
                         help="number of image channels")
-    parser.add_argument("--sample_interval",
+    parser.add_argument("--epoch_interval",
                         type=int,
                         default=50,
                         help="interval between saving generator outputs")
     parser.add_argument("--checkpoint_interval",
                         type=int,
-                        default=-1,
+                        default=50,
                         help="interval between saving model checkpoints")
     parser.add_argument("--n_residual_blocks",
                         type=int,

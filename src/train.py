@@ -176,7 +176,7 @@ def train(output_path,
             )
 
             # If at sample interval save image
-            if epoch % epoch_interval == 0:
+            if i == len(train_dataloader)-1 and (epoch+1) % epoch_interval == 0:
                 sample_images(output_path,
                               dataset_name,
                               epoch,
@@ -190,7 +190,7 @@ def train(output_path,
         lr_scheduler_D_A.step()
         lr_scheduler_D_B.step()
 
-        if checkpoint_interval != -1 and epoch % checkpoint_interval == 0:
+        if epoch % checkpoint_interval == 0 or epoch+1 == epochs:
             # Save model checkpoints
             saved_models_path = str(Path(output_path).joinpath("saved_models"))
             torch.save(G_AB.state_dict(),
