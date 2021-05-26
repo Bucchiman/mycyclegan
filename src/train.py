@@ -60,7 +60,7 @@ def train(output_path,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
           img_shape,
-          epoch_interval,
+          sample_interval,
           checkpoint_interval):
     prev_time = time()
     transform_D = transforms.Compose([
@@ -69,7 +69,6 @@ def train(output_path,
             transforms.ToTensor()])
     for epoch in range(epochs):
         for i, batch in enumerate(train_dataloader):
-
             # Set model input
             real_A = batch["A"].to(device)
             real_B = batch["B"].to(device)
@@ -182,7 +181,7 @@ def train(output_path,
             )
 
             # If at sample interval save image
-            if i == len(train_dataloader)-1 and (epoch+1) % epoch_interval == 0:
+            if i == len(train_dataloader)-1 and (epoch+1) % sample_interval == 0:
                 sample_images(output_path,
                               dataset_name,
                               epoch,

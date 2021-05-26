@@ -16,6 +16,6 @@ return
 #
 
 
-nohup python main.py ../datas ../outputs --device cuda:1 --dataset_name mycustom --n_epochs 100 --decay_epoch 80 --epoch_interval 50 --checkpoint_interval 40 > hoge.log &
+nohup python main.py ../datas ../outputs --device cuda:1 --dataset_name mycustom --n_epochs 100 --decay_epoch 80 --sample_interval 50 --checkpoint_interval 40 > hoge.log &
 
 return
