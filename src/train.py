@@ -63,6 +63,10 @@ def train(output_path,
           sample_interval,
           checkpoint_interval):
     prev_time = time()
+    transform_D = transforms.Compose([
+            transforms.ToPILImage(),
+            transforms.Resize(img_shape),
+            transforms.ToTensor()])
     for epoch in range(epochs):
         for i, batch in enumerate(train_dataloader):
             # Set model input
@@ -93,7 +97,6 @@ def train(output_path,
 
             # GAN loss
             fake_B = G_AB(real_A)
-            transform_D = transforms.Resize(img_shape)
             loss_GAN_AB = criterion_GAN(D_B(transform_D(fake_B)), valid)
             fake_A = G_BA(real_B)
             loss_GAN_BA = criterion_GAN(D_A(transform_D(fake_A)), valid)
