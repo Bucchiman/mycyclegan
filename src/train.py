@@ -3,8 +3,9 @@ from pathlib import Path
 from time import time
 import torch
 from torchvision.utils import make_grid, save_image
-from torchvision import transforms
+from torch import nn
 from datetime import datetime, timedelta
+from kornia.geometry import transform
 
 
 def sample_images(output_path,
@@ -63,10 +64,8 @@ def train(output_path,
           sample_interval,
           checkpoint_interval):
     prev_time = time()
-    transform_D = transforms.Compose([
-            transforms.ToPILImage(),
-            transforms.Resize(img_shape),
-            transforms.ToTensor()])
+    transform_D = nn.Sequential(transform.Resize(img_shape))
+
     for epoch in range(epochs):
         for i, batch in enumerate(train_dataloader):
             # Set model input
