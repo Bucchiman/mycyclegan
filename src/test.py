@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
 # FileName: 	test
 # CreatedDate:  2021-05-19 01:33:39 +0900
-# LastModified: 2021-05-19 02:53:12 +0900
+# LastModified: 2021-05-27 23:20:06 +0900
 #
 
 
@@ -19,13 +18,14 @@ import cv2
 from models import GeneratorResNet
 
 
-def test(data_path,
+def test(img_shape,
+         data_path,
          output_path,
          generator,
          device):
     generator = generator.to(device)
     generator.eval()
-    mytransform = transforms.Compose([transforms.Resize((256, 256), Image.BICUBIC),
+    mytransform = transforms.Compose([transforms.Resize(img_shape, Image.BICUBIC),
                                       transforms.ToTensor(),
                                       transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
     output_transform = transforms.ToPILImage()
@@ -45,11 +45,12 @@ def test(data_path,
 
 
 def main(args):
+    img_shape = (args.img_height, args.img_width)
     if not Path(args.output_path).exists():
         Path(args.output_path).mkdir()
-    generator = GeneratorResNet((3, 256, 256), 9)
+    generator = GeneratorResNet((3, *img_shape), 9)
     generator.load_state_dict(torch.load(args.model_path, map_location=torch.device(args.device)))
-    test(args.data_path, args.output_path, generator, args.device)
+    test(img_shape, args.data_path, args.output_path, generator, args.device)
 
 
 if __name__ == "__main__":
@@ -60,5 +61,7 @@ if __name__ == "__main__":
     parser.add_argument("--device", choices=("cpu", "cuda:0", "cuda:1"),
                         default="cpu")
     parser.add_argument("--batch", default=1)
+    parser.add_argument("--img_height", type=int, default=1024)
+    parser.add_argument("--img_width", type=int, default=512)
     args = parser.parse_args()
     main(args)
