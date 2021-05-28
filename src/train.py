@@ -80,8 +80,8 @@ def train(output_path,
             real_B = batch["B"].to(device)
 
             # Adversarial ground truths
-            valid = torch.ones((real_A.size(0), *D_A.output_shape)).to(device)
-            fake = torch.zeros((real_A.size(0), *D_A.output_shape)).to(device)
+            valid = torch.ones((real_A.size(0), *(1, 16, 16))).to(device)
+            fake = torch.zeros((real_A.size(0), *(1, 16, 16))).to(device)
 
             optimizer_G.zero_grad()
 
@@ -198,7 +198,7 @@ def train(output_path,
                        "%s/G_AB_%d.pth" % (saved_models_path, epoch))
             torch.save(G_BA.state_dict(),
                        "%s/G_BA_%d.pth" % (saved_models_path, epoch))
-            torch.save(D_A.state_dict(),
-                       "%s/D_A_%d.pth" % (saved_models_path, epoch))
-            torch.save(D_B.state_dict(),
-                       "%s/D_B_%d.pth" % (saved_models_path, epoch))
+#            torch.save(D_A.state_dict(),
+#                       "%s/D_A_%d.pth" % (saved_models_path, epoch))
+#            torch.save(D_B.state_dict(),
+#                       "%s/D_B_%d.pth" % (saved_models_path, epoch))
