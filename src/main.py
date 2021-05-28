@@ -129,7 +129,7 @@ if __name__ == "__main__":
     parser.add_argument("output_path")
     parser.add_argument("--device",
                         type=str,
-                        choices=["cpu", "cuda:0", "cuda:1"],
+                        choices=["cpu", "cuda:0", "cuda:1", "cuda:2", "cuda:3"],
                         default="cpu")
     parser.add_argument("--n_epochs",
                         type=int,
