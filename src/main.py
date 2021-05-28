@@ -3,13 +3,14 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-27 19:10:20 +0900
+# LastModified: 2021-05-28 20:56:33 +0900
 #
 
 
 from datetime import datetime
 import argparse
 from itertools import chain
+import torch
 from torch import nn
 from torch import optim
 from torch.utils.data import DataLoader
@@ -29,6 +30,7 @@ def main(args):
     Path(args.output_path).mkdir(parents=True)
     saved_models_path = str(Path(args.output_path).joinpath("saved_models"))
     Path(saved_models_path).mkdir()
+    torch.backends.cudnn.benchmark = True
 
     criterion_GAN = nn.MSELoss()
     criterion_GAN = criterion_GAN.to(args.device)
@@ -47,6 +49,11 @@ def main(args):
     G_BA.apply(weights_init_normal)
     D_A.apply(weights_init_normal)
     D_B.apply(weights_init_normal)
+    if args.multigpu:
+        G_AB = nn.DataParallel(G_AB)
+        G_BA = nn.DataParallel(G_BA)
+        D_A = nn.DataParallel(D_A)
+        D_B = nn.DataParallel(D_B)
 
     optimizer_G = optim.Adam(chain(G_AB.parameters(),
                                    G_BA.parameters()),
@@ -129,8 +136,10 @@ if __name__ == "__main__":
     parser.add_argument("output_path")
     parser.add_argument("--device",
                         type=str,
-                        choices=["cpu", "cuda:0", "cuda:1", "cuda:2", "cuda:3"],
+                        choices=["cpu", "cuda", "cuda:0",
+                                 "cuda:1", "cuda:2", "cuda:3"],
                         default="cpu")
+    parser.add_argument("--multigpu", action="store_true")
     parser.add_argument("--n_epochs",
                         type=int,
                         default=200,
