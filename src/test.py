@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # FileName: 	test
 # CreatedDate:  2021-05-19 01:33:39 +0900
-# LastModified: 2021-05-27 23:20:06 +0900
+# LastModified: 2021-05-28 23:35:22 +0900
 #
 
 
@@ -15,6 +15,7 @@ import torch
 from torchvision import transforms
 import kornia
 import cv2
+from collections import OrderedDict
 from models import GeneratorResNet
 
 
@@ -49,7 +50,12 @@ def main(args):
     if not Path(args.output_path).exists():
         Path(args.output_path).mkdir()
     generator = GeneratorResNet((3, *img_shape), 9)
-    generator.load_state_dict(torch.load(args.model_path, map_location=torch.device(args.device)))
+    weights = torch.load(args.model_path, map_location=torch.device(args.device))
+    new_weights = OrderedDict()
+    for key, value in weights.items():
+        new_key = key.replace("module.", "")
+        new_weights[new_key] = value
+    generator.load_state_dict(new_weights)
     test(img_shape, args.data_path, args.output_path, generator, args.device)
 
 
