@@ -65,6 +65,13 @@ def train(output_path,
           checkpoint_interval):
     prev_time = time()
     transform_D = nn.Sequential(transform.Resize(img_shape))
+    transform_D = transform_D.to(device)
+    G_AB = G_AB.to(device)
+    G_BA = G_BA.to(device)
+    D_A = D_A.to(device)
+    D_B = D_B.to(device)
+    G_AB.train()
+    G_BA.train()
 
     for epoch in range(epochs):
         for i, batch in enumerate(train_dataloader):
@@ -75,16 +82,6 @@ def train(output_path,
             # Adversarial ground truths
             valid = torch.ones((real_A.size(0), *D_A.output_shape)).to(device)
             fake = torch.zeros((real_A.size(0), *D_A.output_shape)).to(device)
-
-            # ------------------
-            #  Train Generators
-            # ------------------
-            G_AB = G_AB.to(device)
-            G_BA = G_BA.to(device)
-            D_A = D_A.to(device)
-            D_B = D_B.to(device)
-            G_AB.train()
-            G_BA.train()
 
             optimizer_G.zero_grad()
 

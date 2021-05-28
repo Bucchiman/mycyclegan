@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-27 02:49:32 +0900
+# LastModified: 2021-05-27 19:10:20 +0900
 #
 
 
@@ -41,8 +41,8 @@ def main(args):
     generate_input_shape = (args.channels, args.generator_img_height, args.generator_img_width)
     G_AB = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
     G_BA = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
-    D_A = Discriminator(input_shape, generate_input_shape)
-    D_B = Discriminator(input_shape, generate_input_shape)
+    D_A = Discriminator(input_shape)
+    D_B = Discriminator(input_shape)
     G_AB.apply(weights_init_normal)
     G_BA.apply(weights_init_normal)
     D_A.apply(weights_init_normal)
@@ -129,7 +129,7 @@ if __name__ == "__main__":
     parser.add_argument("output_path")
     parser.add_argument("--device",
                         type=str,
-                        choices=["cpu", "cuda:0", "cuda:1"],
+                        choices=["cpu", "cuda:0", "cuda:1", "cuda:2", "cuda:3"],
                         default="cpu")
     parser.add_argument("--n_epochs",
                         type=int,

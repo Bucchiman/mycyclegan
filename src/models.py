@@ -94,16 +94,8 @@ class GeneratorResNet(nn.Module):
 
 
 class Discriminator(nn.Module):
-    def __init__(self, input_shape, generator_input_shape):
+    def __init__(self, input_shape):
         super(Discriminator, self).__init__()
-
-        _, gheight, gwidth = generator_input_shape
-        self.g_shape = (gheight, gwidth)
-        self.g_transform = transforms.Compose([
-            transforms.ToPILImage(),
-            transforms.Resize(self.g_shape),
-            transforms.ToTensor()
-            ])
 
         channels, height, width = input_shape
 
@@ -128,9 +120,4 @@ class Discriminator(nn.Module):
         )
 
     def forward(self, img):
-        for i in range(img.size(0)):
-            if i == 0:
-                x = self.g_transform(img[i]).view(1, img.size(1), *self.g_shape)
-            else:
-                x = torch.cat([x, self.g_transform(img[i]).view(1, img.size(1), *self.g_shape)], 0)
-        return self.model(x)
+        return self.model(img)
