@@ -3,10 +3,11 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-28 20:56:33 +0900
+# LastModified: 2021-05-29 05:15:57 +0900
 #
 
 
+import os
 from datetime import datetime
 import argparse
 from itertools import chain
@@ -16,7 +17,7 @@ from torch import optim
 from torch.utils.data import DataLoader
 from torchvision import transforms
 from PIL import Image
-
+from collections import OrderedDict
 from pathlib import Path
 from models import GeneratorResNet, Discriminator, weights_init_normal
 from utils import LambdaLR, ReplayBuffer
@@ -45,15 +46,30 @@ def main(args):
     G_BA = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
     D_A = Discriminator(input_shape)
     D_B = Discriminator(input_shape)
-    G_AB.apply(weights_init_normal)
-    G_BA.apply(weights_init_normal)
-    D_A.apply(weights_init_normal)
-    D_B.apply(weights_init_normal)
+    models = [G_AB, G_BA, D_A, D_B]
+    if args.initial:
+        G_AB.apply(weights_init_normal)
+        G_BA.apply(weights_init_normal)
+        D_A.apply(weights_init_normal)
+        D_B.apply(weights_init_normal)
+        start_epoch = 0
+    else:
+        files = ["_".join(("G_AB", str(args.checkpoint_epoch)))+".pth",
+                 "_".join(("G_BA", str(args.checkpoint_epoch)))+".pth",
+                 "_".join(("D_A", str(args.checkpoint_epoch)))+".pth",
+                 "_".join(("D_B", str(args.checkpoint_epoch)))+".pth"]
+        start_epoch = args.checkpoint_epoch
+        for model, f in zip(models, files):
+            assert f in os.listdir(args.checkpoint_path)
+            model_name = str(Path(args.checkpoint_path).joinpath(f))
+            model.load_state_dict(torch.load(model_name, map_location=torch.device(args.device)))
+
     if args.multigpu:
         G_AB = nn.DataParallel(G_AB)
         G_BA = nn.DataParallel(G_BA)
         D_A = nn.DataParallel(D_A)
         D_B = nn.DataParallel(D_B)
+    return
 
     optimizer_G = optim.Adam(chain(G_AB.parameters(),
                                    G_BA.parameters()),
@@ -117,6 +133,7 @@ def main(args):
           criterion_GAN,
           criterion_identity,
           criterion_cycle,
+          start_epoch,
           args.lambda_id,
           args.lambda_cyc,
           fake_A_buffer,
@@ -140,6 +157,9 @@ if __name__ == "__main__":
                                  "cuda:1", "cuda:2", "cuda:3"],
                         default="cpu")
     parser.add_argument("--multigpu", action="store_true")
+    parser.add_argument("--initial", action="store_true")
+    parser.add_argument("--checkpoint_path", default=None, type=str)
+    parser.add_argument("--checkpoint_epoch", default=None, type=int)
     parser.add_argument("--n_epochs",
                         type=int,
                         default=200,

@@ -52,6 +52,7 @@ def train(output_path,
           criterion_GAN,
           criterion_identity,
           criterion_cycle,
+          checkpoint_epoch,
           lambda_id,
           lambda_cyc,
           fake_A_buffer,
@@ -73,7 +74,7 @@ def train(output_path,
     G_AB.train()
     G_BA.train()
 
-    for epoch in range(epochs):
+    for epoch in range(checkpoint_epoch, epochs):
         for i, batch in enumerate(train_dataloader):
             # Set model input
             real_A = batch["A"].to(device)
@@ -198,7 +199,7 @@ def train(output_path,
                        "%s/G_AB_%d.pth" % (saved_models_path, epoch))
             torch.save(G_BA.state_dict(),
                        "%s/G_BA_%d.pth" % (saved_models_path, epoch))
-#            torch.save(D_A.state_dict(),
-#                       "%s/D_A_%d.pth" % (saved_models_path, epoch))
-#            torch.save(D_B.state_dict(),
-#                       "%s/D_B_%d.pth" % (saved_models_path, epoch))
+            torch.save(D_A.state_dict(),
+                       "%s/D_A_%d.pth" % (saved_models_path, epoch))
+            torch.save(D_B.state_dict(),
+                       "%s/D_B_%d.pth" % (saved_models_path, epoch))
