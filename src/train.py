@@ -99,6 +99,8 @@ def train(output_path,
             loss_GAN_BA = criterion_GAN(D_A(transform_D(fake_A)), valid)
 
             loss_GAN = (loss_GAN_AB + loss_GAN_BA) / 2
+            del loss_GAN_AB
+            del loss_GAN_BA
 
             # Cycle loss
             recov_A = G_BA(fake_B)
@@ -107,11 +109,14 @@ def train(output_path,
             loss_cycle_B = criterion_cycle(recov_B, real_B)
 
             loss_cycle = (loss_cycle_A + loss_cycle_B) / 2
+            del loss_cycle_A
+            del loss_cycle_B
 
             # Total loss
             loss_G = loss_GAN+lambda_cyc*loss_cycle+lambda_id*loss_identity
 
             loss_G.backward()
+            del loss_G
             optimizer_G.step()
 
             # -----------------------
@@ -146,9 +151,12 @@ def train(output_path,
             loss_D_B = (loss_real + loss_fake) / 2
 
             loss_D_B.backward()
+            loss_D = (loss_D_A + loss_D_B) / 2
+
+            del loss_D_A
+            del loss_D_B
             optimizer_D_B.step()
 
-            loss_D = (loss_D_A + loss_D_B) / 2
 
             # --------------
             #  Log Progress
@@ -168,11 +176,11 @@ def train(output_path,
                     epochs,
                     i,
                     len(train_dataloader),
-                    loss_D.item(),
-                    loss_G.item(),
-                    loss_GAN.item(),
-                    loss_cycle.item(),
-                    loss_identity.item(),
+#                    loss_D.item(),
+#                    loss_G.item(),
+#                    loss_GAN.item(),
+#                    loss_cycle.item(),
+#                    loss_identity.item(),
                     time_left,
                 )
             )
