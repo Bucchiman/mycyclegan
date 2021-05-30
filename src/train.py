@@ -45,7 +45,6 @@ def train(output_path,
           G_AB,
           G_BA,
           train_dataloader,
-          valid_dataloader,
           optimizer_G,
           optimizer_D_A,
           optimizer_D_B,
@@ -99,6 +98,8 @@ def train(output_path,
             loss_GAN_BA = criterion_GAN(D_A(transform_D(fake_A)), valid)
 
             loss_GAN = (loss_GAN_AB + loss_GAN_BA) / 2
+            del loss_GAN_AB
+            del loss_GAN_BA
 
             # Cycle loss
             recov_A = G_BA(fake_B)
@@ -107,11 +108,14 @@ def train(output_path,
             loss_cycle_B = criterion_cycle(recov_B, real_B)
 
             loss_cycle = (loss_cycle_A + loss_cycle_B) / 2
+            del loss_cycle_A
+            del loss_cycle_B
 
             # Total loss
             loss_G = loss_GAN+lambda_cyc*loss_cycle+lambda_id*loss_identity
 
             loss_G.backward()
+            del loss_G
             optimizer_G.step()
 
             # -----------------------
@@ -146,9 +150,12 @@ def train(output_path,
             loss_D_B = (loss_real + loss_fake) / 2
 
             loss_D_B.backward()
+            loss_D = (loss_D_A + loss_D_B) / 2
+
+            del loss_D_A
+            del loss_D_B
             optimizer_D_B.step()
 
-            loss_D = (loss_D_A + loss_D_B) / 2
 
             # --------------
             #  Log Progress
@@ -162,30 +169,41 @@ def train(output_path,
 
             # Print log
             sys.stdout.write(
-                "\r[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f, adv: %f, cycle: %f, identity: %f] ETA: %s\n"
+                "\r[Epoch %d/%d] [Batch %d/%d] ETA: %s\n"
                 % (
                     epoch,
                     epochs,
                     i,
                     len(train_dataloader),
-                    loss_D.item(),
-                    loss_G.item(),
-                    loss_GAN.item(),
-                    loss_cycle.item(),
-                    loss_identity.item(),
                     time_left,
                 )
             )
 
+#            sys.stdout.write(
+#                "\r[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f, adv: %f, cycle: %f, identity: %f] ETA: %s\n"
+#                % (
+#                    epoch,
+#                    epochs,
+#                    i,
+#                    len(train_dataloader),
+#                    loss_D.item(),
+#                    loss_G.item(),
+#                    loss_GAN.item(),
+#                    loss_cycle.item(),
+#                    loss_identity.item(),
+#                    time_left,
+#                )
+#            )
+
             # If at sample interval save image
-            if i == len(train_dataloader)-1 and (epoch+1) % sample_interval == 0:
-                sample_images(output_path,
-                              dataset_name,
-                              epoch,
-                              G_AB,
-                              G_BA,
-                              valid_dataloader,
-                              device)
+#            if i == len(train_dataloader)-1 and (epoch+1) % sample_interval == 0:
+#                sample_images(output_path,
+#                              dataset_name,
+#                              epoch,
+#                              G_AB,
+#                              G_BA,
+#                              valid_dataloader,
+#                              device)
 
         # Update learning rates
         lr_scheduler_G.step()
