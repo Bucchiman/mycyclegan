@@ -45,7 +45,6 @@ def train(output_path,
           G_AB,
           G_BA,
           train_dataloader,
-          valid_dataloader,
           optimizer_G,
           optimizer_D_A,
           optimizer_D_B,
@@ -170,30 +169,41 @@ def train(output_path,
 
             # Print log
             sys.stdout.write(
-                "\r[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f, adv: %f, cycle: %f, identity: %f] ETA: %s\n"
+                "\r[Epoch %d/%d] [Batch %d/%d] ETA: %s\n"
                 % (
                     epoch,
                     epochs,
                     i,
                     len(train_dataloader),
+                    time_left,
+                )
+            )
+
+#            sys.stdout.write(
+#                "\r[Epoch %d/%d] [Batch %d/%d] [D loss: %f] [G loss: %f, adv: %f, cycle: %f, identity: %f] ETA: %s\n"
+#                % (
+#                    epoch,
+#                    epochs,
+#                    i,
+#                    len(train_dataloader),
 #                    loss_D.item(),
 #                    loss_G.item(),
 #                    loss_GAN.item(),
 #                    loss_cycle.item(),
 #                    loss_identity.item(),
-                    time_left,
-                )
-            )
+#                    time_left,
+#                )
+#            )
 
             # If at sample interval save image
-            if i == len(train_dataloader)-1 and (epoch+1) % sample_interval == 0:
-                sample_images(output_path,
-                              dataset_name,
-                              epoch,
-                              G_AB,
-                              G_BA,
-                              valid_dataloader,
-                              device)
+#            if i == len(train_dataloader)-1 and (epoch+1) % sample_interval == 0:
+#                sample_images(output_path,
+#                              dataset_name,
+#                              epoch,
+#                              G_AB,
+#                              G_BA,
+#                              valid_dataloader,
+#                              device)
 
         # Update learning rates
         lr_scheduler_G.step()

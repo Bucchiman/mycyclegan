@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-29 05:15:57 +0900
+# LastModified: 2021-05-30 15:26:16 +0000
 #
 
 
@@ -69,7 +69,6 @@ def main(args):
         G_BA = nn.DataParallel(G_BA)
         D_A = nn.DataParallel(D_A)
         D_B = nn.DataParallel(D_B)
-    return
 
     optimizer_G = optim.Adam(chain(G_AB.parameters(),
                                    G_BA.parameters()),
@@ -109,14 +108,14 @@ def main(args):
                                   batch_size=args.batch_size,
                                   shuffle=True,
                                   num_workers=args.n_cpu)
-    valid_dataset = ImageDataset(str(Path(args.data_path).joinpath(args.dataset_name)),
-                                 transforms_=transforms_,
-                                 unaligned=True,
-                                 mode="test")
-    valid_dataloader = DataLoader(valid_dataset,
-                                  batch_size=5,
-                                  shuffle=True,
-                                  num_workers=1)
+#    valid_dataset = ImageDataset(str(Path(args.data_path).joinpath(args.dataset_name)),
+#                                 transforms_=transforms_,
+#                                 unaligned=True,
+#                                 mode="test")
+#    valid_dataloader = DataLoader(valid_dataset,
+#                                  batch_size=5,
+#                                  shuffle=True,
+#                                  num_workers=1)
 
     train(args.output_path,
           args.dataset_name,
@@ -126,7 +125,7 @@ def main(args):
           G_AB,
           G_BA,
           train_dataloader,
-          valid_dataloader,
+#          valid_dataloader,
           optimizer_G,
           optimizer_D_A,
           optimizer_D_B,
