@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-29 05:15:57 +0900
+# LastModified: 2021-05-30 05:47:14 +0900
 #
 
 
@@ -114,7 +114,7 @@ def main(args):
                                  unaligned=True,
                                  mode="test")
     valid_dataloader = DataLoader(valid_dataset,
-                                  batch_size=5,
+                                  batch_size=1,
                                   shuffle=True,
                                   num_workers=1)
 
