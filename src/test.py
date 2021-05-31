@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # FileName: 	test
 # CreatedDate:  2021-05-19 01:33:39 +0900
-# LastModified: 2021-05-28 23:35:22 +0900
+# LastModified: 2021-05-31 12:49:54 +0000
 #
 
 
@@ -39,8 +39,8 @@ def test(img_shape,
 
         output = generator(green)
         output = torch.squeeze(output)
-        output = output.mul(torch.FloatTensor([0.5, 0.5, 0.5]).view(3, 1, 1))
-        output = output.add(torch.FloatTensor([0.5, 0.5, 0.5]).view(3, 1, 1))
+        output = output.mul(torch.FloatTensor([0.5, 0.5, 0.5]).view(3, 1, 1).to(device))
+        output = output.add(torch.FloatTensor([0.5, 0.5, 0.5]).view(3, 1, 1).to(device))
         cherry = output_transform(output)
         cherry.save(str(Path(output_path).joinpath(name)))
 
