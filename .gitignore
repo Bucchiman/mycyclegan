@@ -2,3 +2,4 @@ __pycache__/
 datas/
 outputs/
 src/cyclegan.py
+.DS_Store
