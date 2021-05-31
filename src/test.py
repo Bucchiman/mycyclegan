@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # FileName: 	test
 # CreatedDate:  2021-05-19 01:33:39 +0900
-# LastModified: 2021-05-31 15:19:19 +0000
+# LastModified: 2021-06-01 00:21:16 +0900
 #
 
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     parser.add_argument("data_path", type=str)
     parser.add_argument("output_path", type=str)
     parser.add_argument("model_path", type=str)
-    parser.add_argument("--device", choices=("cpu", "cuda:0", "cuda:1"),
+    parser.add_argument("--device", choices=("cpu", "cuda:0", "cuda:1", "cuda:2"),
                         default="cpu")
     parser.add_argument("--batch", default=1)
     parser.add_argument("--img_height", type=int, default=1024)
