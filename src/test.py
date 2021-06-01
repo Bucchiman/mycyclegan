@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # FileName: 	test
 # CreatedDate:  2021-05-19 01:33:39 +0900
-# LastModified: 2021-05-28 23:35:22 +0900
+# LastModified: 2021-06-01 00:21:16 +0900
 #
 
 
@@ -39,8 +39,8 @@ def test(img_shape,
 
         output = generator(green)
         output = torch.squeeze(output)
-        output = output.mul(torch.FloatTensor([0.5, 0.5, 0.5]).view(3, 1, 1))
-        output = output.add(torch.FloatTensor([0.5, 0.5, 0.5]).view(3, 1, 1))
+        output = output.mul(torch.FloatTensor([0.5, 0.5, 0.5]).view(3, 1, 1).to(device))
+        output = output.add(torch.FloatTensor([0.5, 0.5, 0.5]).view(3, 1, 1).to(device))
         cherry = output_transform(output)
         cherry.save(str(Path(output_path).joinpath(name)))
 
@@ -49,7 +49,7 @@ def main(args):
     img_shape = (args.img_height, args.img_width)
     if not Path(args.output_path).exists():
         Path(args.output_path).mkdir()
-    generator = GeneratorResNet((3, *img_shape), 9)
+    generator = GeneratorResNet((3, *img_shape), args.n_residual_blocks)
     weights = torch.load(args.model_path, map_location=torch.device(args.device))
     new_weights = OrderedDict()
     for key, value in weights.items():
@@ -64,10 +64,11 @@ if __name__ == "__main__":
     parser.add_argument("data_path", type=str)
     parser.add_argument("output_path", type=str)
     parser.add_argument("model_path", type=str)
-    parser.add_argument("--device", choices=("cpu", "cuda:0", "cuda:1"),
+    parser.add_argument("--device", choices=("cpu", "cuda:0", "cuda:1", "cuda:2"),
                         default="cpu")
     parser.add_argument("--batch", default=1)
     parser.add_argument("--img_height", type=int, default=1024)
     parser.add_argument("--img_width", type=int, default=512)
+    parser.add_argument("--n_residual_blocks", type=int, default=9)
     args = parser.parse_args()
     main(args)
