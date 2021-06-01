@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-06-02 00:39:14 +0900
+# LastModified: 2021-06-02 00:51:55 +0900
 #
 
 
@@ -46,6 +46,7 @@ def main(args):
     G_BA = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
     D_A = Discriminator(input_shape)
     D_B = Discriminator(input_shape)
+    output_shape = D_A.output_shape
     models = [G_AB, G_BA, D_A, D_B]
     if args.initial:
         G_AB.apply(weights_init_normal)
@@ -146,6 +147,7 @@ def main(args):
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
+          output_shape,
           trans_flag,
           discriminator_img_shape,
           args.sample_interval,

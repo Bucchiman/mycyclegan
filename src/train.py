@@ -60,6 +60,7 @@ def train(output_path,
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
+          output_shape,
           trans_flag,
           discriminator_img_shape,
           sample_interval,
@@ -81,8 +82,8 @@ def train(output_path,
             real_B = batch["B"].to(device)
 
             # Adversarial ground truths
-            valid = torch.ones((real_A.size(0), *(1, 16, 16))).to(device)
-            fake = torch.zeros((real_A.size(0), *(1, 16, 16))).to(device)
+            valid = torch.ones((real_A.size(0), *output_shape)).to(device)
+            fake = torch.zeros((real_A.size(0), *output_shape)).to(device)
 
             optimizer_G.zero_grad()
 
