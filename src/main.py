@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-05-30 15:26:16 +0000
+# LastModified: 2021-06-02 00:08:21 +0900
 #
 
 
@@ -92,7 +92,12 @@ def main(args):
                                                    lr_lambda=LambdaLR(args.n_epochs,
                                                                       0,
                                                                       args.decay_epoch).step)
-    img_shape = (args.img_height, args.img_width)
+    discriminator_img_shape = (args.discriminator_img_height, args.discriminator_img_width)
+    if (args.discriminator_img_height == args.generator_img_height) and \
+       (args.discriminator_img_width == args.generator_img_width):
+        trans_flag = False
+    else:
+        trans_flag = True
     fake_A_buffer = ReplayBuffer()
     fake_B_buffer = ReplayBuffer()
     transforms_ = [transforms.Resize((args.generator_img_height,
@@ -141,7 +146,8 @@ def main(args):
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
-          img_shape,
+          trans_flag,
+          discriminator_img_shape,
           args.sample_interval,
           args.checkpoint_interval)
 
@@ -192,11 +198,11 @@ if __name__ == "__main__":
                         type=int,
                         default=8,
                         help="number of cpu threads to use during batch generation")
-    parser.add_argument("--img_height",
+    parser.add_argument("--discriminator_img_height",
                         type=int,
                         default=256,
                         help="size of image height")
-    parser.add_argument("--img_width",
+    parser.add_argument("--discriminator_img_width",
                         type=int,
                         default=256,
                         help="size of image width")
