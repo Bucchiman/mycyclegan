@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-06-02 00:51:55 +0900
+# LastModified: 2021-06-02 00:54:17 +0900
 #
 
 
@@ -40,7 +40,7 @@ def main(args):
     criterion_identity = nn.L1Loss()
     criterion_identity = criterion_identity.to(args.device)
 
-    input_shape = (args.channels, args.img_height, args.img_width)
+    input_shape = (args.channels, args.discriminator_img_height, args.discriminator_img_width)
     generate_input_shape = (args.channels, args.generator_img_height, args.generator_img_width)
     G_AB = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
     G_BA = GeneratorResNet(generate_input_shape, args.n_residual_blocks)

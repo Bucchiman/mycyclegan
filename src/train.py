@@ -95,13 +95,13 @@ def train(output_path,
 
             # GAN loss
             fake_B = G_AB(real_A)
+            fake_A = G_BA(real_B)
             if trans_flag:
                 loss_GAN_AB = criterion_GAN(D_B(transform_D(fake_B)), valid)
                 loss_GAN_BA = criterion_GAN(D_A(transform_D(fake_A)), valid)
             else:
                 loss_GAN_AB = criterion_GAN(D_B(fake_B), valid)
                 loss_GAN_BA = criterion_GAN(D_A(fake_A), valid)
-            fake_A = G_BA(real_B)
 
             loss_GAN = (loss_GAN_AB + loss_GAN_BA) / 2
             del loss_GAN_AB
