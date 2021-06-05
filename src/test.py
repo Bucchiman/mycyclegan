@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # FileName: 	test
 # CreatedDate:  2021-05-19 01:33:39 +0900
-# LastModified: 2021-06-06 03:30:16 +0900
+# LastModified: 2021-06-06 04:14:09 +0900
 #
 
 
@@ -17,6 +17,7 @@ import kornia
 import cv2
 from collections import OrderedDict
 from models import GeneratorResNet
+from utils import Config
 
 
 def test(img_shape,
@@ -46,17 +47,20 @@ def test(img_shape,
 
 
 def main(args):
-    img_shape = (args.img_height, args.img_width)
-    if not Path(args.output_path).exists():
-        Path(args.output_path).mkdir(parents=True)
-    generator = GeneratorResNet((3, *img_shape), args.n_residual_blocks)
-    weights = torch.load(args.model_path, map_location=torch.device(args.device))
+    cfg = Config(args)
+    if args["config"]:
+        args = cfg.load_config(args["config_path"])
+    img_shape = (args["img_height"], args["img_width"])
+    if not Path(args["output_path"]).exists():
+        Path(args["output_path"]).mkdir(parents=True)
+    generator = GeneratorResNet((3, *img_shape), args["n_residual_blocks"])
+    weights = torch.load(args["model_path"], map_location=torch.device(args["device"]))
     new_weights = OrderedDict()
     for key, value in weights.items():
         new_key = key.replace("module.", "")
         new_weights[new_key] = value
     generator.load_state_dict(new_weights)
-    test(img_shape, args.data_path, args.output_path, generator, args.device)
+    test(img_shape, args["data_path"], args["output_path"], generator, args["device"])
 
 
 if __name__ == "__main__":
@@ -64,11 +68,13 @@ if __name__ == "__main__":
     parser.add_argument("data_path", type=str)
     parser.add_argument("output_path", type=str)
     parser.add_argument("model_path", type=str)
+    parser.add_argument("--config", action="store_true")
+    parser.add_argument("--config_path", default=None, type=str)
     parser.add_argument("--device", choices=("cpu", "cuda:0", "cuda:1", "cuda:2"),
                         default="cpu")
     parser.add_argument("--batch", default=1)
     parser.add_argument("--img_height", type=int, default=1024)
     parser.add_argument("--img_width", type=int, default=512)
     parser.add_argument("--n_residual_blocks", type=int, default=9)
-    args = parser.parse_args()
+    args = vars(parser.parse_args())
     main(args)

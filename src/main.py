@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-06-05 19:17:52 +0900
+# LastModified: 2021-06-06 04:19:11 +0900
 #
 
 
@@ -26,13 +26,13 @@ from train import train
 
 
 def main(args):
-    cfg = Config(args)
+    cfg = Config()
     time_keeper = datetime.now().strftime(r"%Y_%m_%d_%H_%M")
     output_path = str(Path(args["output_path"]).joinpath(time_keeper))
     Path(output_path).mkdir(parents=True)
     if args["config"]:
         args = cfg.load_config(args["config_path"])
-    cfg.save_config(output_path)
+    cfg.save_config(args, output_path)
     args["output_path"] = output_path
     saved_models_path = str(Path(args["output_path"]).joinpath("saved_models"))
     Path(saved_models_path).mkdir()
