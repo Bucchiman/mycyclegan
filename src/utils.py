@@ -51,5 +51,7 @@ class Config(object):
         with open(str(Path(output_path).joinpath("config.json")), 'w') as fp:
             json.dump(self.args, fp, indent=4)
 
-    def load_config(self, cfg):
-        pass
+    def load_config(self, config_path):
+        with open(str(Path(config_path)), 'r') as fp:
+            self.args = json.load(fp)
+        return self.args

@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-06-05 18:39:59 +0900
+# LastModified: 2021-06-05 19:17:52 +0900
 #
 
 
@@ -28,19 +28,22 @@ from train import train
 def main(args):
     cfg = Config(args)
     time_keeper = datetime.now().strftime(r"%Y_%m_%d_%H_%M")
-    args["output_path"] = str(Path(args["output_path"]).joinpath(time_keeper))
-    Path(args["output_path"]).mkdir(parents=True)
-    cfg.save_config(args["output_path"])
+    output_path = str(Path(args["output_path"]).joinpath(time_keeper))
+    Path(output_path).mkdir(parents=True)
+    if args["config"]:
+        args = cfg.load_config(args["config_path"])
+    cfg.save_config(output_path)
+    args["output_path"] = output_path
     saved_models_path = str(Path(args["output_path"]).joinpath("saved_models"))
     Path(saved_models_path).mkdir()
     torch.backends.cudnn.benchmark = True
 
     criterion_GAN = nn.MSELoss()
-    criterion_GAN = criterion_GAN.to(args.device)
+    criterion_GAN = criterion_GAN.to(args["device"])
     criterion_cycle = nn.L1Loss()
-    criterion_cycle = criterion_cycle.to(args.device)
+    criterion_cycle = criterion_cycle.to(args["device"])
     criterion_identity = nn.L1Loss()
-    criterion_identity = criterion_identity.to(args.device)
+    criterion_identity = criterion_identity.to(args["device"])
 
     input_shape = (args["channels"], args["discriminator_img_height"], args["discriminator_img_width"])
     generate_input_shape = (args["channels"], args["generator_img_height"], args["generator_img_width"])
@@ -116,7 +119,7 @@ def main(args):
                                   batch_size=args["batch_size"],
                                   shuffle=True,
                                   num_workers=args["n_cpu"])
-#    valid_dataset = ImageDataset(str(Path(args.data_path).joinpath(args.dataset_name)),
+#    valid_dataset = ImageDataset(str(Path(args["data_path"]).joinpath(args["dataset_name"])),
 #                                 transforms_=transforms_,
 #                                 unaligned=True,
 #                                 mode="test")
@@ -160,6 +163,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("data_path")
     parser.add_argument("output_path")
+    parser.add_argument("--config", action="store_true")
+    parser.add_argument("--config_path", default=None, type=str)
     parser.add_argument("--device",
                         type=str,
                         choices=["cpu", "cuda", "cuda:0",
