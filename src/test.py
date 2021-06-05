@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # FileName: 	test
 # CreatedDate:  2021-05-19 01:33:39 +0900
-# LastModified: 2021-06-01 00:21:16 +0900
+# LastModified: 2021-06-06 03:30:16 +0900
 #
 
 
@@ -48,7 +48,7 @@ def test(img_shape,
 def main(args):
     img_shape = (args.img_height, args.img_width)
     if not Path(args.output_path).exists():
-        Path(args.output_path).mkdir()
+        Path(args.output_path).mkdir(parents=True)
     generator = GeneratorResNet((3, *img_shape), args.n_residual_blocks)
     weights = torch.load(args.model_path, map_location=torch.device(args.device))
     new_weights = OrderedDict()
