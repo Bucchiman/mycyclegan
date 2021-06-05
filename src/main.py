@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-06-02 00:54:17 +0900
+# LastModified: 2021-06-05 18:39:59 +0900
 #
 
 
@@ -20,16 +20,18 @@ from PIL import Image
 from collections import OrderedDict
 from pathlib import Path
 from models import GeneratorResNet, Discriminator, weights_init_normal
-from utils import LambdaLR, ReplayBuffer
+from utils import LambdaLR, ReplayBuffer, Config
 from datasets import ImageDataset
 from train import train
 
 
 def main(args):
+    cfg = Config(args)
     time_keeper = datetime.now().strftime(r"%Y_%m_%d_%H_%M")
-    args.output_path = str(Path(args.output_path).joinpath(time_keeper))
-    Path(args.output_path).mkdir(parents=True)
-    saved_models_path = str(Path(args.output_path).joinpath("saved_models"))
+    args["output_path"] = str(Path(args["output_path"]).joinpath(time_keeper))
+    Path(args["output_path"]).mkdir(parents=True)
+    cfg.save_config(args["output_path"])
+    saved_models_path = str(Path(args["output_path"]).joinpath("saved_models"))
     Path(saved_models_path).mkdir()
     torch.backends.cudnn.benchmark = True
 
@@ -40,32 +42,32 @@ def main(args):
     criterion_identity = nn.L1Loss()
     criterion_identity = criterion_identity.to(args.device)
 
-    input_shape = (args.channels, args.discriminator_img_height, args.discriminator_img_width)
-    generate_input_shape = (args.channels, args.generator_img_height, args.generator_img_width)
-    G_AB = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
-    G_BA = GeneratorResNet(generate_input_shape, args.n_residual_blocks)
+    input_shape = (args["channels"], args["discriminator_img_height"], args["discriminator_img_width"])
+    generate_input_shape = (args["channels"], args["generator_img_height"], args["generator_img_width"])
+    G_AB = GeneratorResNet(generate_input_shape, args["n_residual_blocks"])
+    G_BA = GeneratorResNet(generate_input_shape, args["n_residual_blocks"])
     D_A = Discriminator(input_shape)
     D_B = Discriminator(input_shape)
     output_shape = D_A.output_shape
     models = [G_AB, G_BA, D_A, D_B]
-    if args.initial:
+    if args["initial"]:
         G_AB.apply(weights_init_normal)
         G_BA.apply(weights_init_normal)
         D_A.apply(weights_init_normal)
         D_B.apply(weights_init_normal)
         start_epoch = 0
     else:
-        files = ["_".join(("G_AB", str(args.checkpoint_epoch)))+".pth",
-                 "_".join(("G_BA", str(args.checkpoint_epoch)))+".pth",
-                 "_".join(("D_A", str(args.checkpoint_epoch)))+".pth",
-                 "_".join(("D_B", str(args.checkpoint_epoch)))+".pth"]
-        start_epoch = args.checkpoint_epoch
+        files = ["_".join(("G_AB", str(args["checkpoint_epoch"])))+".pth",
+                 "_".join(("G_BA", str(args["checkpoint_epoch"])))+".pth",
+                 "_".join(("D_A", str(args["checkpoint_epoch"])))+".pth",
+                 "_".join(("D_B", str(args["checkpoint_epoch"])))+".pth"]
+        start_epoch = args["checkpoint_epoch"]
         for model, f in zip(models, files):
-            assert f in os.listdir(args.checkpoint_path)
-            model_name = str(Path(args.checkpoint_path).joinpath(f))
-            model.load_state_dict(torch.load(model_name, map_location=torch.device(args.device)))
+            assert f in os.listdir(args["checkpoint_path"])
+            model_name = str(Path(args["checkpoint_path"]).joinpath(f))
+            model.load_state_dict(torch.load(model_name, map_location=torch.device(args["device"])))
 
-    if args.multigpu:
+    if args["multigpu"]:
         G_AB = nn.DataParallel(G_AB)
         G_BA = nn.DataParallel(G_BA)
         D_A = nn.DataParallel(D_A)
@@ -73,47 +75,47 @@ def main(args):
 
     optimizer_G = optim.Adam(chain(G_AB.parameters(),
                                    G_BA.parameters()),
-                             lr=args.lr,
-                             betas=(args.b1, args.b2))
+                             lr=args["lr"],
+                             betas=(args["b1"], args["b2"]))
     optimizer_D_A = optim.Adam(D_A.parameters(),
-                               lr=args.lr,
-                               betas=(args.b1, args.b2))
+                               lr=args["lr"],
+                               betas=(args["b1"], args["b2"]))
     optimizer_D_B = optim.Adam(D_B.parameters(),
-                               lr=args.lr,
-                               betas=(args.b1, args.b2))
+                               lr=args["lr"],
+                               betas=(args["b1"], args["b2"]))
     lr_scheduler_G = optim.lr_scheduler.LambdaLR(optimizer_G,
-                                                 lr_lambda=LambdaLR(args.n_epochs,
+                                                 lr_lambda=LambdaLR(args["n_epochs"],
 -                                                                   0,
--                                                                   args.decay_epoch).step)
+-                                                                   args["decay_epoch"]).step)
     lr_scheduler_D_A = optim.lr_scheduler.LambdaLR(optimizer_D_A,
-                                                   lr_lambda=LambdaLR(args.n_epochs,
+                                                   lr_lambda=LambdaLR(args["n_epochs"],
 -                                                                     0,
--                                                                     args.decay_epoch).step)
+-                                                                     args["decay_epoch"]).step)
     lr_scheduler_D_B = optim.lr_scheduler.LambdaLR(optimizer_D_B,
-                                                   lr_lambda=LambdaLR(args.n_epochs,
+                                                   lr_lambda=LambdaLR(args["n_epochs"],
                                                                       0,
-                                                                      args.decay_epoch).step)
-    discriminator_img_shape = (args.discriminator_img_height, args.discriminator_img_width)
-    if (args.discriminator_img_height == args.generator_img_height) and \
-       (args.discriminator_img_width == args.generator_img_width):
+                                                                      args["decay_epoch"]).step)
+    discriminator_img_shape = (args["discriminator_img_height"], args["discriminator_img_width"])
+    if (args["discriminator_img_height"] == args["generator_img_height"]) and \
+       (args["discriminator_img_width"] == args["generator_img_width"]):
         trans_flag = False
     else:
         trans_flag = True
     fake_A_buffer = ReplayBuffer()
     fake_B_buffer = ReplayBuffer()
-    transforms_ = [transforms.Resize((args.generator_img_height,
-                                      args.generator_img_width),
+    transforms_ = [transforms.Resize((args["generator_img_height"],
+                                      args["generator_img_width"]),
                                      Image.BICUBIC),
                    transforms.RandomHorizontalFlip(),
                    transforms.ToTensor(),
                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
-    train_dataset = ImageDataset(str(Path(args.data_path).joinpath(args.dataset_name)),
+    train_dataset = ImageDataset(str(Path(args["data_path"]).joinpath(args["dataset_name"])),
                                  transforms_=transforms_,
                                  unaligned=True)
     train_dataloader = DataLoader(train_dataset,
-                                  batch_size=args.batch_size,
+                                  batch_size=args["batch_size"],
                                   shuffle=True,
-                                  num_workers=args.n_cpu)
+                                  num_workers=args["n_cpu"])
 #    valid_dataset = ImageDataset(str(Path(args.data_path).joinpath(args.dataset_name)),
 #                                 transforms_=transforms_,
 #                                 unaligned=True,
@@ -123,9 +125,9 @@ def main(args):
 #                                  shuffle=True,
 #                                  num_workers=1)
 
-    train(args.output_path,
-          args.dataset_name,
-          args.n_epochs,
+    train(args["output_path"],
+          args["dataset_name"],
+          args["n_epochs"],
           D_A,
           D_B,
           G_AB,
@@ -139,19 +141,19 @@ def main(args):
           criterion_identity,
           criterion_cycle,
           start_epoch,
-          args.lambda_id,
-          args.lambda_cyc,
+          args["lambda_id"],
+          args["lambda_cyc"],
           fake_A_buffer,
           fake_B_buffer,
-          args.device,
+          args["device"],
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
           output_shape,
           trans_flag,
           discriminator_img_shape,
-          args.sample_interval,
-          args.checkpoint_interval)
+          args["sample_interval"],
+          args["checkpoint_interval"])
 
 
 if __name__ == "__main__":
@@ -240,5 +242,5 @@ if __name__ == "__main__":
                         type=float,
                         default=5.0,
                         help="identity loss weight")
-    args = parser.parse_args()
+    args = vars(parser.parse_args())
     main(args)

@@ -2,7 +2,8 @@ import random
 import time
 import datetime
 import sys
-
+import json
+from pathlib import Path
 import torch
 
 from torchvision.utils import save_image
@@ -42,3 +43,13 @@ class LambdaLR:
         return 1.0 - max(0, epoch + self.offset - self.decay_start_epoch) / (self.n_epochs - self.decay_start_epoch)
 
 
+class Config(object):
+    def __init__(self, args):
+        self.args = args
+
+    def save_config(self, output_path):
+        with open(str(Path(output_path).joinpath("config.json")), 'w') as fp:
+            json.dump(self.args, fp, indent=4)
+
+    def load_config(self, cfg):
+        pass
