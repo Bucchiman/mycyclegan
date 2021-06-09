@@ -55,3 +55,7 @@ class Config(object):
         with open(str(Path(config_path)), 'r') as fp:
             args = json.load(fp)
         return args
+
+
+def save_model(model, save_models_path: str):
+    torch.save(model.state_dict(), save_models_path)
