@@ -57,5 +57,6 @@ class Config(object):
         return args
 
 
-def save_model(model, save_models_path: str, input_shape):
-    torch.onnx.export(model, input_shape, save_models_path, verbose=False)
+def save_model(model, save_models_path: str, input_shape, batch_size=1, device="cuda:1"):
+    input_torch = torch.randn(batch_size, *input_shape, device=device)
+    torch.onnx.export(model, input_torch, save_models_path, verbose=False)
