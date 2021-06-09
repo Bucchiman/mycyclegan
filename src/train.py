@@ -6,6 +6,7 @@ from torchvision.utils import make_grid, save_image
 from torch import nn
 from datetime import datetime, timedelta
 from kornia.geometry import transform
+from utils import save_model
 
 
 def sample_images(output_path,
@@ -225,11 +226,7 @@ def train(output_path,
         if epoch % checkpoint_interval == 0 or epoch+1 == epochs:
             # Save model checkpoints
             saved_models_path = str(Path(output_path).joinpath("saved_models"))
-            torch.save(G_AB.state_dict(),
-                       "%s/G_AB_%d.pth" % (saved_models_path, epoch))
-            torch.save(G_BA.state_dict(),
-                       "%s/G_BA_%d.pth" % (saved_models_path, epoch))
-            torch.save(D_A.state_dict(),
-                       "%s/D_A_%d.pth" % (saved_models_path, epoch))
-            torch.save(D_B.state_dict(),
-                       "%s/D_B_%d.pth" % (saved_models_path, epoch))
+            save_model(G_AB, "{}/G_AB_{}.pth".format(saved_models_path, str(epoch).zfill(4)))
+            save_model(G_BA, "{}/G_BA_{}.pth".format(saved_models_path, str(epoch).zfill(4)))
+            save_model(D_A, "{}/D_A_{}.pth".format(saved_models_path, str(epoch).zfill(4)))
+            save_model(D_B, "{}/D_B_{}.pth".format(saved_models_path, str(epoch).zfill(4)))
