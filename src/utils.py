@@ -44,18 +44,14 @@ class LambdaLR:
 
 
 class Config(object):
-    def __init__(self, args):
-        self.args = args
+    def __init__(self):
+        pass
 
-    def save_config(self, output_path):
+    def save_config(self, args, output_path):
         with open(str(Path(output_path).joinpath("config.json")), 'w') as fp:
-            json.dump(self.args, fp, indent=4)
+            json.dump(args, fp, indent=4)
 
     def load_config(self, config_path):
         with open(str(Path(config_path)), 'r') as fp:
-            self.args = json.load(fp)
-        return self.args
-
-
-def save_model(model, save_models_path: str):
-    torch.save(model.state_dict(), save_models_path)
+            args = json.load(fp)
+        return args
