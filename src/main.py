@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-06-06 04:19:11 +0900
+# LastModified: 2021-06-09 23:55:00 +0900
 #
 
 
@@ -45,12 +45,14 @@ def main(args):
     criterion_identity = nn.L1Loss()
     criterion_identity = criterion_identity.to(args["device"])
 
-    input_shape = (args["channels"], args["discriminator_img_height"], args["discriminator_img_width"])
-    generate_input_shape = (args["channels"], args["generator_img_height"], args["generator_img_width"])
-    G_AB = GeneratorResNet(generate_input_shape, args["n_residual_blocks"])
-    G_BA = GeneratorResNet(generate_input_shape, args["n_residual_blocks"])
-    D_A = Discriminator(input_shape)
-    D_B = Discriminator(input_shape)
+    input_dict = {"D_A": (args["channels"], args["discriminator_img_height"], args["discriminator_img_width"]),
+                  "D_B": (args["channels"], args["discriminator_img_height"], args["discriminator_img_width"]),
+                  "G_AB": (args["channels"], args["generator_img_height"], args["generator_img_width"]),
+                  "G_BA": (args["channels"], args["generator_img_height"], args["generator_img_width"])}
+    G_AB = GeneratorResNet(input_dict["G_AB"], args["n_residual_blocks"])
+    G_BA = GeneratorResNet(input_dict["G_BA"], args["n_residual_blocks"])
+    D_A = Discriminator(input_dict["D_A"])
+    D_B = Discriminator(input_dict["D_B"])
     output_shape = D_A.output_shape
     models = [G_AB, G_BA, D_A, D_B]
     if args["initial"]:
@@ -152,6 +154,7 @@ def main(args):
           lr_scheduler_G,
           lr_scheduler_D_A,
           lr_scheduler_D_B,
+          input_dict,
           output_shape,
           trans_flag,
           discriminator_img_shape,

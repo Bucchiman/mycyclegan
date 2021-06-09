@@ -57,5 +57,5 @@ class Config(object):
         return args
 
 
-def save_model(model, save_models_path: str):
-    torch.save(model.state_dict(), save_models_path)
+def save_model(model, save_models_path: str, input_shape):
+    torch.onnx.export(model, input_shape, save_models_path, verbose=False)
