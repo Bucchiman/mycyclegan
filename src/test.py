@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # FileName: 	test
 # CreatedDate:  2021-05-19 01:33:39 +0900
-# LastModified: 2021-06-06 04:14:09 +0900
+# LastModified: 2021-06-29 15:54:11 +0900
 #
 
 
@@ -47,7 +47,7 @@ def test(img_shape,
 
 
 def main(args):
-    cfg = Config(args)
+    cfg = Config()
     if args["config"]:
         args = cfg.load_config(args["config_path"])
     img_shape = (args["img_height"], args["img_width"])
