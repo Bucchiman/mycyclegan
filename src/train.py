@@ -227,10 +227,6 @@ def train(output_path,
         if epoch % checkpoint_interval == 0 or epoch+1 == epochs:
             # Save model checkpoints
             saved_models_path = str(Path(output_path).joinpath("saved_models"))
-#            save_model(G_AB, "{}/G_AB_{}.onnx".format(saved_models_path, str(epoch).zfill(4)), input_dict["G_AB"])
-#            save_model(G_BA, "{}/G_BA_{}.onnx".format(saved_models_path, str(epoch).zfill(4)), input_dict["G_BA"])
-#            save_model(D_A, "{}/D_A_{}.onnx".format(saved_models_path, str(epoch).zfill(4)), input_dict["D_A"])
-#            save_model(D_B, "{}/D_B_{}.onnx".format(saved_models_path, str(epoch).zfill(4)), input_dict["D_B"])
             save_model(G_AB, "{}/G_AB_{}.pth".format(saved_models_path, str(epoch).zfill(4)))
             save_model(G_BA, "{}/G_BA_{}.pth".format(saved_models_path, str(epoch).zfill(4)))
             save_model(D_A, "{}/D_A_{}.pth".format(saved_models_path, str(epoch).zfill(4)))
