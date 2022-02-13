@@ -3,7 +3,7 @@
 #
 # FileName: 	main
 # CreatedDate:  2021-04-30 20:14:48 +0900
-# LastModified: 2021-06-09 23:55:00 +0900
+# LastModified: 2022-02-13 01:48:14 +0900
 #
 
 
@@ -110,7 +110,7 @@ def main(args):
     fake_B_buffer = ReplayBuffer()
     transforms_ = [transforms.Resize((args["generator_img_height"],
                                       args["generator_img_width"]),
-                                     Image.BICUBIC),
+                                     transforms.InterpolationMode.BICUBIC),
                    transforms.RandomHorizontalFlip(),
                    transforms.ToTensor(),
                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
